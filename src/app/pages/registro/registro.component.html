@@ -1,0 +1,92 @@
+<app-header></app-header>
+
+<div class="mt-5 w-full d-flex justify-content-center">
+  <div class="logo-container">
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="p-4" novalidate>
+      <h2>Registro de Usuario</h2>
+
+      <div class="mb-3">
+        <label for="username" class="form-label">Nombre de Usuario</label>
+        <input type="text" id="username" class="form-control"
+               formControlName="username" [class.is-invalid]="f['username'].touched && f['username'].invalid"
+               placeholder="Ingresa tu nombre de usuario">
+        <div *ngIf="f['username'].touched && f['username'].invalid" class="invalid-feedback">
+          Por favor, ingresa un nombre de usuario válido.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre Completo</label>
+        <input type="text" id="nombre" class="form-control"
+               formControlName="nombre" [class.is-invalid]="f['nombre'].touched && f['nombre'].invalid"
+               placeholder="Ingresa tu nombre completo">
+        <div *ngIf="f['nombre'].touched && f['nombre'].invalid" class="invalid-feedback">
+          Por favor, ingrese su nombre
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="fecNacimiento" class="form-label">Fecha Nacimiento</label>
+        <input type="date" id="fecNacimiento" class="form-control"
+               formControlName="fecNacimiento" [class.is-invalid]="f['fecNacimiento'].touched && f['fecNacimiento'].invalid"
+               placeholder="Ingresa tu fecha de nacimiento">
+        <div *ngIf="f['fecNacimiento'].touched && f['fecNacimiento'].invalid" class="invalid-feedback">
+          Por favor, ingrese su fecha de nacimiento
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="direccion" class="form-label">Direccion</label>
+        <input type="text" id="direccion" class="form-control"
+               formControlName="direccion" [class.is-invalid]="f['direccion'].touched && f['direccion'].invalid"
+               placeholder="Ingresa tu direccion">
+        <div *ngIf="f['direccion'].touched && f['direccion'].invalid" class="invalid-feedback">
+          Por favor, ingrese direccion.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="correo" class="form-label">Correo Electronico</label>
+        <input type="email" id="correo" class="form-control"
+               formControlName="correo" [class.is-invalid]="f['correo'].touched && f['correo'].invalid"
+               placeholder="Ingresa tu correo electronico">
+        <div *ngIf="f['correo'].touched && f['correo'].invalid" class="invalid-feedback">
+          Por favor, ingrese su email.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" id="password" class="form-control"
+               formControlName="password" [class.is-invalid]="f['password'].touched && f['password'].invalid"
+               placeholder="Ingresa tu contraseña">
+        <div *ngIf="f['password'].touched && f['password'].invalid" class="invalid-feedback">
+          Por favor, ingresar una contraseña válida.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+        <input type="password" id="confirmPassword" class="form-control"
+               formControlName="confirmPassword" [class.is-invalid]="f['confirmPassword'].touched && f['confirmPassword'].invalid"
+               placeholder="Vuelve a ingresar tu contraseña">
+        <div *ngIf="f['confirmPassword'].touched && f['confirmPassword'].invalid" class="invalid-feedback">
+          La contraseña debe coincider.
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Registrar</button>
+
+      <p class="mt-3">
+        ¿Olvidaste tu contraseña?
+        <a href="recuperar-contrasenia.html">Recuperar contraseña</a>
+      </p>
+      <p class="mt-3">
+        ¿Ya tienes cuenta?
+        <a routerLink="/login" routerLinkActive="active">Inicia Sesión Aquí</a>
+      </p>
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>
+

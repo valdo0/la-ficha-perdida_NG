@@ -1,0 +1,57 @@
+<div class="page-container d-flex flex-column min-vh-100">
+  <app-header></app-header>
+  <main class="flex-grow-1 container mt-4">
+    <div class="container mt-4">
+      <h2>Carrito de Compras</h2>
+
+      <div *ngIf="carrito.length === 0">
+        <p>Tu carrito está vacío.</p>
+      </div>
+
+      <table *ngIf="carrito.length > 0" class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of carrito">
+            <td>{{ item.name }}</td>
+            <td>
+              <button
+                class="btn btn-success btn-sm mx-1"
+                (click)="aumentarCantidad(item.id)"
+              >
+                +
+              </button>
+              {{ item.cantidad }}
+              <button
+                class="btn btn-danger btn-sm mx-1"
+                (click)="disminuirCantidad(item.id)"
+              >
+                -
+              </button>
+            </td>
+            <td>${{ item.price | number : "1.0-0" }}</td>
+            <td>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="eliminarItem(item)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="carrito.length > 0" class="text-end mt-3">
+        <h4>Total: ${{ getTotal() | number : "1.0-0" }}</h4>
+      </div>
+    </div>
+  </main>
+  <app-footer></app-footer>
+</div>

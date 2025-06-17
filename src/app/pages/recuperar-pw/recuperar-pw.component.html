@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div class="mt-5 w-full d-flex justify-content-center">
+  <div class="logo-container">
+    <form class="p-4" id="form-recuperar-pw" novalidate>
+      <h2>Recuperar Contraseña</h2>
+      <div class="mb-3">
+        <label for="username" class="form-label">Nombre de Usuario</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          placeholder="Ingresa tu nombre de usuario"
+        />
+        <div class="invalid-feedback">
+          Por favor, ingresa un nombre de usuario válido.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Ingresa tu contraseña"
+        />
+        <div class="invalid-feedback">
+          Por favor, ingresar una contraseña válida.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password2" class="form-label">Confirmar Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password2"
+          placeholder="Ingresa tu contraseña"
+        />
+        <div class="invalid-feedback">
+          La contraseña debe coincidir con la anterior.
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Confirmar</button>
+      <p class="mt-3">
+        ¿Aún no tienes una cuenta? <a href="registro.html">Regístrate aquí</a>
+      </p>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

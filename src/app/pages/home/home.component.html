@@ -1,0 +1,61 @@
+ <app-header></app-header>
+ <main>
+    <section id="inicio" class="hero">
+      <div>
+        <h1>Descubre la Magia de Jugar</h1>
+        <p>En La Ficha Perdida, reunimos los mejores juegos de mesa para todas las edades y gustos. ¡La diversión está garantizada!</p>
+        <a href="#juegos" class="btn_principal">Explora Nuestros Juegos</a>
+      </div>
+    </section>
+  
+    <section id="juegos" class="section">
+      <div class="container">
+        <h2 class="fade-in">Nuestros Juegos Destacados</h2>
+        <div class="grid-container fade-slide-up">
+          <div class="grid-item" *ngFor="let categoria of categorias">
+            <h3>{{ categoria.nombre }}</h3>
+            <p>{{ categoria.descripcion}}</p>
+            <a [routerLink]="'/productos/' + categoria.id">Ver más</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <section id="novedades" class="section">
+      <div class="container">
+        <h2 class="fade-in">Lo Último en La Ficha Perdida</h2>
+        <p>Mantente al día con nuestras últimas adquisiciones y eventos especiales.</p>
+        <div class="grid-container">
+          <div class="grid-item">
+            <h3>¡Llegó "Aventuras en el Reino"!</h3>
+            <p>Un nuevo juego de rol cooperativo que te sumergirá en fantásticos desafíos. ¡Disponible ahora!</p>
+            <a href="#">Saber más</a>
+          </div>
+          <div class="grid-item">
+            <h3>Próximo Torneo de Catan</h3>
+            <p>Inscríbete y demuestra tus habilidades en nuestro torneo mensual. ¡Grandes premios!</p>
+            <a href="#">Detalles</a>
+          </div>
+        </div>
+        <div class="testimonial">
+          <p>"La Ficha Perdida es mi tienda favorita. Siempre encuentro los juegos que busco y la atención es excelente." - María P.</p>
+        </div>
+      </div>
+    </section>
+  
+    <section id="contacto" class="section">
+      <div class="container">
+        <h2 class="fade-in">¡Hablemos!</h2>
+        <p>¿Tienes alguna pregunta, sugerencia o simplemente quieres saludar? ¡Contáctanos!</p>
+        <p>Email: <a href="mailto:info@lafichaperdida.cl">info@lafichaperdida.cl</a></p>
+        <p>Teléfono: <a href="tel:+56912345678">+56 9 1234 5678</a></p>
+        <p>Síguenos en nuestras redes sociales:</p>
+        <div class="social-links">
+          <a href="#">Facebook</a> |
+          <a href="#">Instagram</a> |
+          <a href="#">X</a>
+        </div>
+      </div>
+    </section>
+  </main>
+<app-footer></app-footer>
