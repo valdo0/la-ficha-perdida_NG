@@ -1,8 +1,10 @@
-<header>
-  <nav class="navbar navbar-expand-lg navbar-light ">
-    <div class="container d-flex justify-content-between align-items-center">
+<header class="">
+  <nav class="navbar navbar-expand-lg px-4">
+    <div class="container d-flex align-items-center position-relative">
+      
+      <!-- Botón hamburguesa (solo visible en móvil) -->
       <button
-        class="navbar-toggler me-2"
+        class="navbar-toggler me-2 d-lg-none order-1 "
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarContent"
@@ -13,44 +15,50 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="mx-auto order-0">
-        <a class="navbar-brand d-flex justify-content-center" href="#">
-          <img
-            src="assets/logo.png"
-            alt="Logo de La Ficha Perdida"
-            class="logo-img"
-            style="height: 40px;"
-          />
-        </a>
-      </div>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center text-lg-start">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/home" routerLinkActive="active">Inicio</a>
-          </li>
-          <li class="nav-item" [class.active]="seccionActiva === 'juegos'">
-            <a class="nav-link" href="#" (click)="irAJuegos($event)">Juegos</a>
-          </li>
-          <li class="nav-item" [class.active]="seccionActiva === 'novedades'">
-            <a class="nav-link" href="#" (click)="irANovedades($event)">Novedades</a>
-          </li>
-          <li class="nav-item" [class.active]="seccionActiva === 'contacto'">
-            <a class="nav-link" href="#" (click)="irAContacto($event)">Contacto</a>
-          </li>
-          <li class="nav-item" *ngIf="!isLoggedIn">
-            <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
-          </li>
-          <li class="nav-item" *ngIf="isAdmin">
-            <a class="nav-link" routerLink="/admin" routerLinkActive="active">Panel Admin</a>
-          </li>
-          <li class="nav-item" *ngIf="!isAdmin && isLoggedIn">
-            <a class="nav-link" routerLink="/carrito" routerLinkActive="active">Carrito</a>
-          </li>
-          <li class="nav-item" *ngIf="isLoggedIn">
-            <a class="nav-link" href="/home" (click)="logout()">Logout</a>
-          </li>
-        </ul>
-      </div>
+      <!-- Logo -->
+      <a
+        class="navbar-brand order-2 order-lg-1 mx-auto mx-lg-0"
+        href="#"
+      >
+        <img
+          src="assets/logo.png"
+          alt="Logo de La Ficha Perdida"
+          style="height: 40px;"
+        />
+      </a>
+
+      <!-- Placeholder solo en móvil para centrar el logo -->
+      <div class="d-lg-none order-3" style="width: 40px;"></div>
+    </div>
+
+    <!-- Menú de navegación (colapsa en móvil) -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center text-lg-start">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Inicio</a>
+        </li>
+        <li class="nav-item" [class.active]="seccionActiva === 'juegos'">
+          <a class="nav-link" href="#" (click)="irAJuegos($event)">Juegos</a>
+        </li>
+        <li class="nav-item" [class.active]="seccionActiva === 'novedades'">
+          <a class="nav-link" href="#" (click)="irANovedades($event)">Novedades</a>
+        </li>
+        <li class="nav-item" [class.active]="seccionActiva === 'contacto'">
+          <a class="nav-link" href="#" (click)="irAContacto($event)">Contacto</a>
+        </li>
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="isAdmin">
+          <a class="nav-link" routerLink="/admin" routerLinkActive="active">Panel Admin</a>
+        </li>
+        <li class="nav-item" *ngIf="!isAdmin && isLoggedIn">
+          <a class="nav-link" routerLink="/carrito" routerLinkActive="active">Carrito</a>
+        </li>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" href="/home" (click)="logout()">Logout</a>
+        </li>
+      </ul>
     </div>
   </nav>
 </header>
