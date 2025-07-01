@@ -182,7 +182,8 @@ export class AdminPanelComponent implements OnInit {
    * @param index - El índice del usuario que se desea eliminar de la lista.
    */
   eliminarUsuario(index: number) {
-    this.usuarios.splice(index, 1);
+    this.authService.deleteUser(index);
+    this.cargarUsuarios();
   }
 /**
  * 
@@ -191,7 +192,6 @@ export class AdminPanelComponent implements OnInit {
  * Renderiza un gráfico de ventas utilizando Chart.js.
  * Obtiene los datos de ventas del almacenamiento local, filtra por el año actual,
  * y agrupa las ventas por mes.
- * Muestra un gráfico de tipo "bar" con los meses del año y las ventas totales por mes.
  */
   renderizarGraficoVentas() {
     const ventasRaw = localStorage.getItem('ventas');

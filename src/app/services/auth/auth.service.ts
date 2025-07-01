@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import Swal from 'sweetalert2';
 
 /**
  * @description
@@ -113,6 +114,11 @@ export class AuthService {
     const usuarios = JSON.parse(usuariosLS);
     const usuario = usuarios.find((u:any)=>u.username===username || u.email===email);
     if(usuario){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'El nombre de usuario o el correo electrónico ya están en uso.',
+      });
       return false;
     }
     const newUsuario ={
@@ -126,6 +132,7 @@ export class AuthService {
     }
     usuarios.push(newUsuario);
     localStorage.setItem("usuarios",JSON.stringify(usuarios))
+    
     return true;
   }
   /**
@@ -189,6 +196,22 @@ export class AuthService {
       users[index] = updatedUser;
       localStorage.setItem('usuarios', JSON.stringify(users));
     }
+  }
+  /**
+   * @description
+   * Método para eliminar un usuario específico.
+   * Busca al usuario por su índice en la lista de usuarios y lo elimina.
+   * @param index Índice del usuario a eliminar
+   * @returns true si el usuario fue eliminado, false en caso contrario
+   */
+  deleteUser(index: number): boolean {
+    const users = this.getAllUsers();
+    if (users && index >= 0 && index < users.length) {
+      users.splice(index, 1);
+      localStorage.setItem('usuarios', JSON.stringify(users));
+      return true;
+    }
+    return false;
   }
   /**
    * @description
