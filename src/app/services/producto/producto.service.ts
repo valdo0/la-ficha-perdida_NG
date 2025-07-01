@@ -1,9 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Producto } from 'src/app/models/producto.model';
+/**
+ * @module ProductoService
+ * @description
+ * Servicio para manejar productos de un catálogo de juegos de mesa.
+ * Proporciona métodos para obtener todos los productos y filtrar por categoría.
+ * @example
+ * const productoService = new ProductoService();
+ * const allProductos = productoService.getAllProductos();
+ * const juegosDeMesa = productoService.getProductosByCategoryId(1);
+ */
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * @description
+ * Servicio para manejar productos de un catálogo de juegos de mesa.
+ * Proporciona métodos para obtener todos los productos y filtrar por categoría.
+ * @class ProductoService
+ * @example
+ * const productoService = new ProductoService();
+ * const allProductos = productoService.getAllProductos();
+ * const juegosDeMesa = productoService.getProductosByCategoryId(1);
+ */
 export class ProductoService {
+  /** 
+   * @description
+   * Lista de productos del catálogo.
+   * Cada producto tiene un id, nombre, precio, categoría, descripción e imagen.
+   * @type {Producto[]}
+   * @property {number} id - Identificador único del producto.
+   */
   private productos:Producto []=[
     {
     id: 1,
@@ -182,11 +209,27 @@ export class ProductoService {
     imageUrl: 'assets/juegos/splendor.jpg'
   }
   ]
+  /**
+   * @description
+   * Crea una instancia del servicio ProductoService.
+   * Este servicio no requiere parámetros en su constructor.
+   */
   constructor() { }
 
+  /**
+   * @description
+   * Obtiene todos los productos del catálogo.
+   * @returns {Producto[]} Lista de productos.
+   */
   getAllProductos(){
     return this.productos;
   }
+
+  /**
+   * @description
+   * Obtiene todos los productos del catálogo.
+   * @returns {Producto[]} Lista de productos.
+   */
   getProductosByCategoryId(id:number){
     return this.productos.filter(p=> p.categoryId==id);
   }

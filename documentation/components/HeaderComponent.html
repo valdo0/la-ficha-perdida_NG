@@ -1,0 +1,1364 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>frontned documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">frontned documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  HeaderComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/components/layout/header/header.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Este componente representa el navbar de la aplicación.
+Es responsable de mostrar información o enlaces relevantes en la parte superiro de la interfaz de usuario.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;app-header&gt;&lt;/app-header&gt;</code></pre></div>
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-header</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./header.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./header.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#seccionActiva" >seccionActiva</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#seccionPendiente" >seccionPendiente</a>
+                            </li>
+                            <li>
+                                <a href="#usuario" >usuario</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#hacerScroll" >hacerScroll</a>
+                            </li>
+                            <li>
+                                <a href="#irAContacto" >irAContacto</a>
+                            </li>
+                            <li>
+                                <a href="#irAJuegos" >irAJuegos</a>
+                            </li>
+                            <li>
+                                <a href="#irANovedades" >irANovedades</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#irASeccion" >irASeccion</a>
+                            </li>
+                            <li>
+                                <a href="#logout" >logout</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#isAdmin" >isAdmin</a>
+                                </li>
+                                <li>
+                                    <a href="#isLoggedIn" >isLoggedIn</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: Router, authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/layout/header/header.component.ts:49</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del componente HeaderComponent.
+Inicializa el componente y configura la suscripción a los eventos de navegación del router.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hacerScroll"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>hacerScroll</b></span>
+                        <a href="#hacerScroll"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>hacerScroll(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="160"
+                                    class="link-to-prism">src/app/components/layout/header/header.component.ts:160</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método que desplaza suavemente la vista hacia un elemento con el ID especificado.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="irAContacto"></a>
+                    <span class="name">
+                        <span ><b>irAContacto</b></span>
+                        <a href="#irAContacto"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>irAContacto(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/components/layout/header/header.component.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método que redirige al usuario a la sección de contacto.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">```html
+&lt;a href=&quot;#&quot; (click)=&quot;irAContacto($event)&quot;&gt;Contacto&lt;/a&gt;</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>El evento de clic que se desencadena al hacer clic en el enlace de contacto.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="irAJuegos"></a>
+                    <span class="name">
+                        <span ><b>irAJuegos</b></span>
+                        <a href="#irAJuegos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>irAJuegos(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/components/layout/header/header.component.ts:129</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método que redirige al usuario a la sección de inicio.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="irANovedades"></a>
+                    <span class="name">
+                        <span ><b>irANovedades</b></span>
+                        <a href="#irANovedades"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>irANovedades(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/components/layout/header/header.component.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método que redirige al usuario a la sección de inicio.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="irASeccion"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>irASeccion</b></span>
+                        <a href="#irASeccion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>irASeccion(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/components/layout/header/header.component.ts:147</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método que redirige al usuario a la sección de inicio.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <span ><b>logout</b></span>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logout()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/components/layout/header/header.component.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método que redirige al usuario a la sección de inicio.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">```html
+&lt;a href=&quot;#&quot; (click)=&quot;irAInicio($event)&quot;&gt;Inicio&lt;/a&gt;</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/components/layout/header/header.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método que se ejecuta al inicializar el componente.
+Obtiene la información del usuario autenticado desde el servicio de autenticación.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="seccionActiva"></a>
+                    <span class="name">
+                        <span ><b>seccionActiva</b></span>
+                        <a href="#seccionActiva"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/components/layout/header/header.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Representa la sección activa del encabezado.
+Se utiliza para resaltar la sección actual en el menú de navegación.
+Por defecto, está vacía.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="seccionPendiente"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>seccionPendiente</b></span>
+                        <a href="#seccionPendiente"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/layout/header/header.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Almacena la sección a la que se desea navegar cuando se realiza una navegación desde una sección diferente.
+Si es <code>null</code>, no hay sección pendiente.
+Se utiliza para manejar la navegación suave a secciones específicas cuando el usuario está en una ruta diferente.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="usuario"></a>
+                    <span class="name">
+                        <span ><b>usuario</b></span>
+                        <a href="#usuario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/layout/header/header.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Representa el usuario autenticado en la aplicación.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isAdmin"></a>
+                        <span class="name"><b>isAdmin</b><a href="#isAdmin"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isAdmin()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/components/layout/header/header.component.ts:80</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Método que se ejecuta al destruir el componente.
+Limpia la información del usuario autenticado.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isLoggedIn"></a>
+                        <span class="name"><b>isLoggedIn</b><a href="#isLoggedIn"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>isLoggedIn()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/components/layout/header/header.component.ts:96</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Método que verifica si el usuario está autenticado.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">```typescript
+if (this.isLoggedIn) {
+  // El usuario está autenticado
+} else {
+  // El usuario no está autenticado
+}</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div></div>
+
+                                <div>
+                                        <b>Example :</b>
+                                            <div>
+                                                <pre class="line-numbers"><code class="language-html">&lt;b&gt;Example :&lt;/b&gt;&lt;div&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;code class=&quot;language-typescript&quot;&gt;if (this.isLoggedIn) {
+  // El usuario está autenticado
+} else {
+  // El usuario no está autenticado
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</code></pre>
+                                            </div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { Router, NavigationEnd } from &#x27;@angular/router&#x27;;
+import { filter } from &#x27;rxjs/operators&#x27;;
+import { AuthService } from &#x27;src/app/services/auth/auth.service&#x27;;
+/**
+ * @description
+ * Este componente representa el navbar de la aplicación.
+ * Es responsable de mostrar información o enlaces relevantes en la parte superiro de la interfaz de usuario.
+ *
+ * @selector app-header
+ * @example
+ * &lt;app-header&gt;&lt;/app-header&gt;
+ */
+@Component({
+  selector: &#x27;app-header&#x27;,
+  templateUrl: &#x27;./header.component.html&#x27;,
+  styleUrls: [&#x27;./header.component.css&#x27;],
+})
+/**
+ * @class HeaderComponent
+ * @description
+ * Clase que representa el componente de encabezado de la aplicación.
+ * Maneja la navegación entre secciones y la autenticación del usuario.
+ */
+export class HeaderComponent {
+  /**
+   * @property {string} seccionActiva
+   * @description
+   * Representa la sección activa del encabezado.
+   * Se utiliza para resaltar la sección actual en el menú de navegación.
+   * Por defecto, está vacía.
+   * @default &#x27;&#x27;
+   */
+  seccionActiva: string &#x3D; &#x27;&#x27;;
+  /**
+   * @property {any} usuario
+   * @description
+   * Representa el usuario autenticado en la aplicación.
+   */
+  usuario: any &#x3D; null;
+  /**
+   * @property {string | null} seccionPendiente
+   * @description
+   * Almacena la sección a la que se desea navegar cuando se realiza una navegación desde una sección diferente.
+   * Si es &#x60;null&#x60;, no hay sección pendiente.
+   * Se utiliza para manejar la navegación suave a secciones específicas cuando el usuario está en una ruta diferente.
+   * @default null
+   */
+  private seccionPendiente: string | null &#x3D; null;
+  /**
+   * @description
+   * Constructor del componente HeaderComponent.
+   * Inicializa el componente y configura la suscripción a los eventos de navegación del router.
+   * @param router
+   * @param authService
+   */
+  constructor(private router: Router, private authService: AuthService) {
+    this.router.events
+      .pipe(filter((event) &#x3D;&gt; event instanceof NavigationEnd))
+      .subscribe(() &#x3D;&gt; {
+        if (this.seccionPendiente) {
+          this.hacerScroll(this.seccionPendiente);
+          this.seccionPendiente &#x3D; null;
+        }
+      });
+  }
+  /**
+   * @description
+   * Método que se ejecuta al inicializar el componente.
+   * Obtiene la información del usuario autenticado desde el servicio de autenticación.
+   */
+  ngOnInit(): void {
+    this.usuario &#x3D; this.authService.getSesion();
+  }
+  /**
+   * @description
+   * Método que se ejecuta al destruir el componente.
+   * Limpia la información del usuario autenticado.
+   */
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+  /**
+   * @description
+   * Método que verifica si el usuario está autenticado.
+   * @returns {boolean} &#x60;true&#x60; si el usuario está autenticado, &#x60;false&#x60; en caso contrario.
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * if (this.isLoggedIn) {
+   *   // El usuario está autenticado
+   * } else {
+   *   // El usuario no está autenticado
+   * }
+   * &#x60;&#x60;&#x60;
+   */
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+  /**
+   * @description
+   * Método que redirige al usuario a la sección de contacto.
+   * @param {Event} event - El evento de clic que se desencadena al hacer clic en el enlace de contacto.
+   * @example
+   * &#x60;&#x60;&#x60;html
+   * &lt;a href&#x3D;&quot;#&quot; (click)&#x3D;&quot;irAContacto($event)&quot;&gt;Contacto&lt;/a&gt;
+   * &#x60;&#x60;&#x60;
+   */
+  irAContacto(event: Event) {
+    event.preventDefault();
+    this.irASeccion(&#x27;contacto&#x27;);
+  }
+  /**
+   * @description
+   * Método que redirige al usuario a la sección de inicio.
+   * @param {Event} event - El evento de clic que se desencadena al hacer clic en el enlace de inicio.
+   * @example
+   * &#x60;&#x60;&#x60;html
+   * &lt;a href&#x3D;&quot;#&quot; (click)&#x3D;&quot;irAInicio($event)&quot;&gt;Inicio&lt;/a&gt;
+   * &#x60;&#x60;&#x60;
+   */
+  logout() {
+    this.authService.logout();
+  }
+  /**
+   *@description
+   * Método que redirige al usuario a la sección de inicio.
+   * @param event
+   */
+  irAJuegos(event: Event) {
+    event.preventDefault();
+    this.irASeccion(&#x27;juegos&#x27;);
+  }
+  /**
+   *@description
+   * Método que redirige al usuario a la sección de inicio.
+   * @param event
+   */
+  irANovedades(event: Event) {
+    event.preventDefault();
+    this.irASeccion(&#x27;novedades&#x27;);
+  }
+  /**
+   *@description
+   * Método que redirige al usuario a la sección de inicio.
+   * @param id
+   */
+  private irASeccion(id: string) {
+    if (this.router.url &#x3D;&#x3D;&#x3D; &#x27;/&#x27;) {
+      this.hacerScroll(id);
+    } else {
+      this.seccionPendiente &#x3D; id;
+      this.router.navigate([&#x27;/&#x27;]);
+    }
+  }
+  /**
+   *@description
+   * Método que desplaza suavemente la vista hacia un elemento con el ID especificado.
+   * @param id
+   */
+  private hacerScroll(id: string) {
+    setTimeout(() &#x3D;&gt; {
+      const el &#x3D; document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: &#x27;smooth&#x27; });
+      }
+    }, 100);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;header class&#x3D;&quot;&quot;&gt;
+  &lt;nav class&#x3D;&quot;navbar navbar-expand-lg px-4&quot;&gt;
+    &lt;div class&#x3D;&quot;container d-flex align-items-center position-relative&quot;&gt;
+      
+      &lt;button
+        class&#x3D;&quot;navbar-toggler me-2 d-lg-none order-1 &quot;
+        type&#x3D;&quot;button&quot;
+        data-bs-toggle&#x3D;&quot;collapse&quot;
+        data-bs-target&#x3D;&quot;#navbarContent&quot;
+        aria-controls&#x3D;&quot;navbarContent&quot;
+        aria-expanded&#x3D;&quot;false&quot;
+        aria-label&#x3D;&quot;Toggle navigation&quot;
+      &gt;
+        &lt;span class&#x3D;&quot;navbar-toggler-icon&quot;&gt;&lt;/span&gt;
+      &lt;/button&gt;
+
+      &lt;a
+        class&#x3D;&quot;navbar-brand order-2 order-lg-1 mx-auto mx-lg-0&quot;
+        href&#x3D;&quot;#&quot;
+      &gt;
+        &lt;img
+          src&#x3D;&quot;assets/logo.png&quot;
+          alt&#x3D;&quot;Logo de La Ficha Perdida&quot;
+          style&#x3D;&quot;height: 40px;&quot;
+        /&gt;
+      &lt;/a&gt;
+
+      &lt;div class&#x3D;&quot;d-lg-none order-3&quot; style&#x3D;&quot;width: 40px;&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;collapse navbar-collapse justify-content-end&quot; id&#x3D;&quot;navbarContent&quot;&gt;
+      &lt;ul class&#x3D;&quot;navbar-nav ms-auto mb-2 mb-lg-0 text-center text-lg-start&quot;&gt;
+        &lt;li class&#x3D;&quot;nav-item&quot;&gt;
+          &lt;a class&#x3D;&quot;nav-link&quot; routerLink&#x3D;&quot;/home&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;Inicio&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;nav-item&quot; [class.active]&#x3D;&quot;seccionActiva &#x3D;&#x3D;&#x3D; &#x27;juegos&#x27;&quot;&gt;
+          &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;#&quot; (click)&#x3D;&quot;irAJuegos($event)&quot;&gt;Juegos&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;nav-item&quot; [class.active]&#x3D;&quot;seccionActiva &#x3D;&#x3D;&#x3D; &#x27;novedades&#x27;&quot;&gt;
+          &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;#&quot; (click)&#x3D;&quot;irANovedades($event)&quot;&gt;Novedades&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;nav-item&quot; [class.active]&#x3D;&quot;seccionActiva &#x3D;&#x3D;&#x3D; &#x27;contacto&#x27;&quot;&gt;
+          &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;#&quot; (click)&#x3D;&quot;irAContacto($event)&quot;&gt;Contacto&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;nav-item&quot; *ngIf&#x3D;&quot;!isLoggedIn&quot;&gt;
+          &lt;a class&#x3D;&quot;nav-link&quot; routerLink&#x3D;&quot;/login&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;Login&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;nav-item&quot; *ngIf&#x3D;&quot;isAdmin&quot;&gt;
+          &lt;a class&#x3D;&quot;nav-link&quot; routerLink&#x3D;&quot;/admin&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;Panel Admin&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;nav-item&quot; *ngIf&#x3D;&quot;!isAdmin &amp;&amp; isLoggedIn&quot;&gt;
+          &lt;a class&#x3D;&quot;nav-link&quot; routerLink&#x3D;&quot;/carrito&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;Carrito&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;nav-item&quot; *ngIf&#x3D;&quot;!isAdmin &amp;&amp; isLoggedIn&quot;&gt;
+          &lt;a class&#x3D;&quot;nav-link&quot; routerLink&#x3D;&quot;/perfil&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;Perfil&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class&#x3D;&quot;nav-item&quot; *ngIf&#x3D;&quot;isLoggedIn&quot;&gt;
+          &lt;a class&#x3D;&quot;nav-link&quot; href&#x3D;&quot;/home&quot; (click)&#x3D;&quot;logout()&quot;&gt;Logout&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./header.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><header class="">  <nav class="navbar navbar-expand-lg px-4">    <div class="container d-flex align-items-center position-relative">            <button        class="navbar-toggler me-2 d-lg-none order-1 "        type="button"        data-bs-toggle="collapse"        data-bs-target="#navbarContent"        aria-controls="navbarContent"        aria-expanded="false"        aria-label="Toggle navigation"      >        <span class="navbar-toggler-icon"></span>      </button>      <a        class="navbar-brand order-2 order-lg-1 mx-auto mx-lg-0"        href="#"      >        <img          src="assets/logo.png"          alt="Logo de La Ficha Perdida"          style="height: 40px;"        />      </a>      <div class="d-lg-none order-3" style="width: 40px;"></div>    </div>    <div class="collapse navbar-collapse justify-content-end" id="navbarContent">      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center text-lg-start">        <li class="nav-item">          <a class="nav-link" routerLink="/home" routerLinkActive="active">Inicio</a>        </li>        <li class="nav-item" [class.active]="seccionActiva === \'juegos\'">          <a class="nav-link" href="#" (click)="irAJuegos($event)">Juegos</a>        </li>        <li class="nav-item" [class.active]="seccionActiva === \'novedades\'">          <a class="nav-link" href="#" (click)="irANovedades($event)">Novedades</a>        </li>        <li class="nav-item" [class.active]="seccionActiva === \'contacto\'">          <a class="nav-link" href="#" (click)="irAContacto($event)">Contacto</a>        </li>        <li class="nav-item" *ngIf="!isLoggedIn">          <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>        </li>        <li class="nav-item" *ngIf="isAdmin">          <a class="nav-link" routerLink="/admin" routerLinkActive="active">Panel Admin</a>        </li>        <li class="nav-item" *ngIf="!isAdmin && isLoggedIn">          <a class="nav-link" routerLink="/carrito" routerLinkActive="active">Carrito</a>        </li>        <li class="nav-item" *ngIf="!isAdmin && isLoggedIn">          <a class="nav-link" routerLink="/perfil" routerLinkActive="active">Perfil</a>        </li>        <li class="nav-item" *ngIf="isLoggedIn">          <a class="nav-link" href="/home" (click)="logout()">Logout</a>        </li>      </ul>    </div>  </nav></header></div>'
+    var COMPONENTS = [{'name': 'AdminPanelComponent', 'selector': 'app-admin-panel'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarritoComponent', 'selector': 'app-carrito'},{'name': 'CategoriaProductoComponent', 'selector': 'app-categoria-producto'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'RecuperarPwComponent', 'selector': 'app-recuperar-pw'},{'name': 'RegistroComponent', 'selector': 'app-registro'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'HeaderComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'HeaderComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

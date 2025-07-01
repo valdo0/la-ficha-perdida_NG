@@ -1,0 +1,1599 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>frontned documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">frontned documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  AdminPanelComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/admin-panel/admin-panel.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Componente para el panel de administración, que permite gestionar usuarios.
+Incluye funcionalidades para agregar, editar y eliminar usuarios,
+así como cambiar entre diferentes pestañas de administración.</p>
+
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-admin-panel</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./admin-panel.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./admin-panel.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#chart" >chart</a>
+                            </li>
+                            <li>
+                                <a href="#chartProductos" >chartProductos</a>
+                            </li>
+                            <li>
+                                <a href="#editIndex" >editIndex</a>
+                            </li>
+                            <li>
+                                <a href="#tabActivo" >tabActivo</a>
+                            </li>
+                            <li>
+                                <a href="#usuarioForm" >usuarioForm</a>
+                            </li>
+                            <li>
+                                <a href="#usuarios" >usuarios</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#activarTab" >activarTab</a>
+                            </li>
+                            <li>
+                                <a href="#cargarUsuarios" >cargarUsuarios</a>
+                            </li>
+                            <li>
+                                <a href="#editarUsuario" >editarUsuario</a>
+                            </li>
+                            <li>
+                                <a href="#eliminarUsuario" >eliminarUsuario</a>
+                            </li>
+                            <li>
+                                <a href="#guardarCambios" >guardarCambios</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#renderizarGraficoProductos" >renderizarGraficoProductos</a>
+                            </li>
+                            <li>
+                                <a href="#renderizarGraficoVentas" >renderizarGraficoVentas</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, fb: FormBuilder)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:60</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del componente AdminPanelComponent.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>Servicio de autenticación para gestionar usuarios.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <ul>
+<li>FormBuilder para crear formularios reactivos.</li>
+</ul>
+
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activarTab"></a>
+                    <span class="name">
+                        <span ><b>activarTab</b></span>
+                        <a href="#activarTab"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>activarTab(tab: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:90</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Activa una pestaña específica en el panel de administración estableciendo el identificador de la pestaña activa.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tab</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>El identificador de la pestaña que se desea activar.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarUsuarios"></a>
+                    <span class="name">
+                        <span ><b>cargarUsuarios</b></span>
+                        <a href="#cargarUsuarios"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cargarUsuarios()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:117</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Carga la lista de usuarios desde el servicio de autenticación.</p>
+<p>Este método utiliza el servicio <code>authService</code> para obtener todos los usuarios.
+Si el resultado es un array, se asigna directamente a la propiedad <code>usuarios</code>.
+Si el resultado es un observable, se suscribe a él y asigna los datos recibidos
+a la propiedad <code>usuarios</code>.</p>
+<p>Este método maneja tanto resultados síncronos como asíncronos del servicio.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">// Ejemplo de uso:
+this.cargarUsuarios();
+console.log(this.usuarios); // Muestra la lista de usuarios cargados.</code></pre></div></div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editarUsuario"></a>
+                    <span class="name">
+                        <span ><b>editarUsuario</b></span>
+                        <a href="#editarUsuario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editarUsuario(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Abre un modal para editar un usuario específico.</p>
+<p>Este método establece el índice del usuario que se está editando,
+obtiene los datos del usuario correspondiente de la lista <code>usuarios</code>
+y actualiza el formulario <code>usuarioForm</code> con los valores del usuario seleccionado.
+Luego, muestra un modal de edición utilizando Bootstrap.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>El índice del usuario en la lista de usuarios que se desea editar.</li>
+</ul>
+<p>Este método establece el índice del usuario que se está editando, 
+obtiene los datos del usuario correspondiente de la lista <code>usuarios</code> 
+y actualiza el formulario <code>usuarioForm</code> con los valores del usuario seleccionado.
+Luego, muestra un modal de edición utilizando Bootstrap.</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="eliminarUsuario"></a>
+                    <span class="name">
+                        <span ><b>eliminarUsuario</b></span>
+                        <a href="#eliminarUsuario"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>eliminarUsuario(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:184</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Elimina un usuario de la lista de usuarios basado en el índice proporcionado.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>El índice del usuario que se desea eliminar de la lista.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guardarCambios"></a>
+                    <span class="name">
+                        <span ><b>guardarCambios</b></span>
+                        <a href="#guardarCambios"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>guardarCambios()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="167"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:167</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Maneja la acción de guardar los cambios realizados a un usuario en el panel de administración.</p>
+<p>Este método se activa cuando el usuario confirma las ediciones en el modal de edición de usuario.
+Valida el formulario, actualiza los datos del usuario en el array local y llama al servicio
+de autenticación para persistir los cambios. Finalmente, cierra el modal y reinicia el índice de edición.</p>
+<ul>
+<li><p>El método asume que <code>this.editIndex</code> está configurado con el índice del usuario que se está editando.</p>
+</li>
+<li><p>El formulario <code>usuarioForm</code> debe ser válido para que los cambios se guarden.</p>
+</li>
+<li><p>La instancia del modal de Bootstrap se accede directamente a través del objeto global <code>window</code>.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">  una instancia válida del modal.</code></pre></div></li>
+</ul>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método del ciclo de vida de Angular que se ejecuta al inicializar el componente.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="renderizarGraficoProductos"></a>
+                    <span class="name">
+                        <span ><b>renderizarGraficoProductos</b></span>
+                        <a href="#renderizarGraficoProductos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>renderizarGraficoProductos()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="256"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:256</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Renderiza un gráfico de productos más vendidos utilizando Chart.js.
+Obtiene los datos de ventas del almacenamiento local, filtra por el año actual,
+y cuenta la cantidad de cada producto vendido.
+Muestra un gráfico de tipo &quot;pie&quot; con los productos y sus cantidades.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="renderizarGraficoVentas"></a>
+                    <span class="name">
+                        <span ><b>renderizarGraficoVentas</b></span>
+                        <a href="#renderizarGraficoVentas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>renderizarGraficoVentas()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="196"
+                                    class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:196</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Renderiza un gráfico de ventas utilizando Chart.js.
+Obtiene los datos de ventas del almacenamiento local, filtra por el año actual,
+y agrupa las ventas por mes.
+Muestra un gráfico de tipo &quot;bar&quot; con los meses del año y las ventas totales por mes.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>void</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chart"></a>
+                    <span class="name">
+                        <span ><b>chart</b></span>
+                        <a href="#chart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Gráfico de ventas que se renderiza en la pestaña de métricas del panel de administración.
+Esta propiedad se inicializa como &#39;any&#39; para permitir cualquier tipo de gráfico de Chart.js.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="chartProductos"></a>
+                    <span class="name">
+                        <span ><b>chartProductos</b></span>
+                        <a href="#chartProductos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Gráfico de productos más vendidos que se renderiza en la pestaña de métricas del panel de administración.
+Esta propiedad se inicializa como &#39;any&#39; para permitir cualquier tipo de gráfico de Chart.js.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editIndex"></a>
+                    <span class="name">
+                        <span ><b>editIndex</b></span>
+                        <a href="#editIndex"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Índice del usuario que se está editando en el panel de administración.
+Se utiliza para identificar qué usuario se está modificando cuando se abre el modal de edición.
+Inicialmente es null, lo que indica que no hay ningún usuario en edición.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tabActivo"></a>
+                    <span class="name">
+                        <span ><b>tabActivo</b></span>
+                        <a href="#tabActivo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;usuarios&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:29</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Identificador de la pestaña activa en el panel de administración.
+Por defecto, se establece en &#39;usuarios&#39;, lo que significa que la pestaña de usuarios está activa al iniciar el componente.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="usuarioForm"></a>
+                    <span class="name">
+                        <span ><b>usuarioForm</b></span>
+                        <a href="#usuarioForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo para gestionar los datos del usuario que se está creando o editando.
+Utiliza FormBuilder para definir los controles y validaciones del formulario.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="usuarios"></a>
+                    <span class="name">
+                        <span ><b>usuarios</b></span>
+                        <a href="#usuarios"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>any[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/pages/admin-panel/admin-panel.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lista de usuarios que se gestionan en el panel de administración.
+Esta propiedad se inicializa como un array vacío y se llenará con los datos de los usuarios.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { AuthService } from &#x27;src/app/services/auth/auth.service&#x27;;
+import {Chart,BarController,BarElement,CategoryScale,LinearScale,Title,Tooltip,Legend,ArcElement,DoughnutController,PieController} from &#x27;chart.js&#x27;;
+Chart.register(BarController,BarElement,CategoryScale,LinearScale,Title,Tooltip,Legend,ArcElement,DoughnutController,PieController);
+/**
+ * @description 
+ * Componente para el panel de administración, que permite gestionar usuarios.
+ * Incluye funcionalidades para agregar, editar y eliminar usuarios,
+ * así como cambiar entre diferentes pestañas de administración.
+ */
+
+
+@Component({
+  selector: &#x27;app-admin-panel&#x27;,
+  templateUrl: &#x27;./admin-panel.component.html&#x27;,
+  styleUrls: [&#x27;./admin-panel.component.css&#x27;]
+})
+/**
+ * @class AdminPanelComponent
+ * @implements OnInit
+ */
+export class AdminPanelComponent implements OnInit {
+  /**
+   * @description
+   * Identificador de la pestaña activa en el panel de administración.
+   * Por defecto, se establece en &#x27;usuarios&#x27;, lo que significa que la pestaña de usuarios está activa al iniciar el componente.
+   */
+  tabActivo: string &#x3D; &#x27;usuarios&#x27;;
+  /**
+   * @description
+   * Lista de usuarios que se gestionan en el panel de administración.
+   * Esta propiedad se inicializa como un array vacío y se llenará con los datos de los usuarios.
+   */
+  usuarios: any[] &#x3D; [];
+  /**
+   * @description
+   * Índice del usuario que se está editando en el panel de administración.
+   * Se utiliza para identificar qué usuario se está modificando cuando se abre el modal de edición.
+   * Inicialmente es null, lo que indica que no hay ningún usuario en edición.
+   */
+  editIndex: number | null &#x3D; null;
+  /**
+   * @description
+   * Gráfico de ventas que se renderiza en la pestaña de métricas del panel de administración.
+   * Esta propiedad se inicializa como &#x27;any&#x27; para permitir cualquier tipo de gráfico de Chart.js.
+   */
+  chart: any;
+  /**
+   * @description
+   * Gráfico de productos más vendidos que se renderiza en la pestaña de métricas del panel de administración.
+   * Esta propiedad se inicializa como &#x27;any&#x27; para permitir cualquier tipo de gráfico de Chart.js.
+   */
+  chartProductos: any;
+  /**
+   * @description
+   * Formulario reactivo para gestionar los datos del usuario que se está creando o editando.
+   * Utiliza FormBuilder para definir los controles y validaciones del formulario.
+   */
+  usuarioForm!: FormGroup;
+/**
+ * @description
+ * Constructor del componente AdminPanelComponent.
+ * @param authService - Servicio de autenticación para gestionar usuarios.
+ * @param fb - FormBuilder para crear formularios reactivos.
+ */
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder
+  ) {}
+/**
+ * @description
+ * Método del ciclo de vida de Angular que se ejecuta al inicializar el componente.
+ */
+  ngOnInit() {
+    this.cargarUsuarios();
+    this.usuarioForm &#x3D; this.fb.group({
+      nombre: [&#x27;&#x27;, Validators.required],
+      email: [&#x27;&#x27;, [Validators.required, Validators.email]],
+      username: [&#x27;&#x27;, Validators.required],
+      tipo: [&#x27;usuario&#x27;, Validators.required]
+    });
+  }
+
+  /**
+   * Activa una pestaña específica en el panel de administración estableciendo el identificador de la pestaña activa.
+   *
+   * @param tab - El identificador de la pestaña que se desea activar.
+   */
+  activarTab(tab: string) {
+    this.tabActivo &#x3D; tab;
+    if (tab &#x3D;&#x3D;&#x3D; &#x27;metricas&#x27;) {
+      setTimeout(() &#x3D;&gt; {
+        this.renderizarGraficoVentas();
+        this.renderizarGraficoProductos();
+      }, 100);
+    }
+  }
+  
+
+  /**
+   * Carga la lista de usuarios desde el servicio de autenticación.
+   * 
+   * Este método utiliza el servicio &#x60;authService&#x60; para obtener todos los usuarios.
+   * Si el resultado es un array, se asigna directamente a la propiedad &#x60;usuarios&#x60;.
+   * Si el resultado es un observable, se suscribe a él y asigna los datos recibidos
+   * a la propiedad &#x60;usuarios&#x60;.
+   * 
+   * @remarks
+   * Este método maneja tanto resultados síncronos como asíncronos del servicio.
+   * 
+   * @example
+   * // Ejemplo de uso:
+   * this.cargarUsuarios();
+   * console.log(this.usuarios); // Muestra la lista de usuarios cargados.
+   */
+  cargarUsuarios() {
+    const resultado &#x3D; this.authService.getAllUsers();
+    if (Array.isArray(resultado)) {
+      this.usuarios &#x3D; resultado;
+    } else if (&#x27;subscribe&#x27; in resultado) {
+      resultado.subscribe((data: any[]) &#x3D;&gt; {
+        this.usuarios &#x3D; data;
+      });
+    }
+  }
+
+  /**
+   * Abre un modal para editar un usuario específico.
+   * 
+   * @param index - El índice del usuario en la lista de usuarios que se desea editar.
+   * 
+   * Este método establece el índice del usuario que se está editando, 
+   * obtiene los datos del usuario correspondiente de la lista &#x60;usuarios&#x60; 
+   * y actualiza el formulario &#x60;usuarioForm&#x60; con los valores del usuario seleccionado.
+   * Luego, muestra un modal de edición utilizando Bootstrap.
+   */
+  editarUsuario(index: number) {
+    this.editIndex &#x3D; index;
+    const usuario &#x3D; this.usuarios[index];
+    this.usuarioForm.patchValue({
+      nombre: usuario.nombre,
+      email: usuario.email,
+      username: usuario.username,
+      tipo: usuario.role || usuario.tipo
+    });
+
+    const modal &#x3D; new (window as any).bootstrap.Modal(document.getElementById(&#x27;modalEditarUsuario&#x27;)!);
+    modal.show();
+  }
+
+  /**
+   * Maneja la acción de guardar los cambios realizados a un usuario en el panel de administración.
+   * 
+   * Este método se activa cuando el usuario confirma las ediciones en el modal de edición de usuario.
+   * Valida el formulario, actualiza los datos del usuario en el array local y llama al servicio 
+   * de autenticación para persistir los cambios. Finalmente, cierra el modal y reinicia el índice de edición.
+   * 
+   * @remarks
+   * - El método asume que &#x60;this.editIndex&#x60; está configurado con el índice del usuario que se está editando.
+   * - El formulario &#x60;usuarioForm&#x60; debe ser válido para que los cambios se guarden.
+   * - La instancia del modal de Bootstrap se accede directamente a través del objeto global &#x60;window&#x60;.
+   * 
+   * @throws No lanza errores, pero depende de la validez de &#x60;usuarioForm&#x60; y de la presencia de 
+   *         una instancia válida del modal.
+   */
+  guardarCambios() {
+    if (this.editIndex !&#x3D;&#x3D; null &amp;&amp; this.usuarioForm.valid) {
+      const updatedUser &#x3D; this.usuarioForm.value;
+      this.usuarios[this.editIndex] &#x3D; updatedUser;
+      this.authService.updateUser(this.editIndex, updatedUser);
+      const modal &#x3D; (window as any).bootstrap.Modal.getInstance(document.getElementById(&#x27;modalEditarUsuario&#x27;)!);
+      modal?.hide();
+      this.editIndex &#x3D; null;
+    }
+  }
+  
+
+  /**
+   * Elimina un usuario de la lista de usuarios basado en el índice proporcionado.
+   *
+   * @param index - El índice del usuario que se desea eliminar de la lista.
+   */
+  eliminarUsuario(index: number) {
+    this.usuarios.splice(index, 1);
+  }
+/**
+ * 
+ * @returns void
+ * @description
+ * Renderiza un gráfico de ventas utilizando Chart.js.
+ * Obtiene los datos de ventas del almacenamiento local, filtra por el año actual,
+ * y agrupa las ventas por mes.
+ * Muestra un gráfico de tipo &quot;bar&quot; con los meses del año y las ventas totales por mes.
+ */
+  renderizarGraficoVentas() {
+    const ventasRaw &#x3D; localStorage.getItem(&#x27;ventas&#x27;);
+    const ventas &#x3D; ventasRaw ? JSON.parse(ventasRaw) : [];
+    const ventasPorMes &#x3D; new Array(12).fill(0);
+    const anioActual &#x3D; new Date().getFullYear();
+
+    ventas.forEach((venta: any) &#x3D;&gt; {
+      const fecha &#x3D; new Date(venta.fecha);
+      if (fecha.getFullYear() &#x3D;&#x3D;&#x3D; anioActual) {
+        const mes &#x3D; fecha.getMonth(); // 0-11
+        ventasPorMes[mes] +&#x3D; venta.total;
+      }
+    });
+
+    const meses &#x3D; [&#x27;Ene&#x27;, &#x27;Feb&#x27;, &#x27;Mar&#x27;, &#x27;Abr&#x27;, &#x27;May&#x27;, &#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Ago&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;, &#x27;Dic&#x27;];
+
+    if (this.chart) {
+      this.chart.destroy();
+    }
+
+    const ctx &#x3D; document.getElementById(&#x27;salesChart&#x27;) as HTMLCanvasElement;
+    if (!ctx) return;
+
+    this.chart &#x3D; new Chart(ctx, {
+      type: &#x27;bar&#x27;,
+      data: {
+        labels: meses,
+        datasets: [{
+          label: &#x27;Ventas por mes&#x27;,
+          data: ventasPorMes,
+          backgroundColor: &#x27;#0d6efd&#x27;
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: &#x60;Ventas en ${anioActual}&#x60;
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: (tickValue: string | number) &#x3D;&gt; typeof tickValue &#x3D;&#x3D;&#x3D; &#x27;number&#x27; ? &#x27;$&#x27; + tickValue : tickValue
+            }
+          }
+        }
+      }
+    });
+  }
+/**
+ * @description
+ * Renderiza un gráfico de productos más vendidos utilizando Chart.js.
+ * Obtiene los datos de ventas del almacenamiento local, filtra por el año actual,
+ * y cuenta la cantidad de cada producto vendido.
+ * Muestra un gráfico de tipo &quot;pie&quot; con los productos y sus cantidades.
+ */
+  renderizarGraficoProductos() {
+    const ventasRaw &#x3D; localStorage.getItem(&#x27;ventas&#x27;);
+    const ventas &#x3D; ventasRaw ? JSON.parse(ventasRaw) : [];
+    const anioActual &#x3D; new Date().getFullYear();
+  
+    const conteoProductos: Record&lt;string, number&gt; &#x3D; {};
+  
+    ventas.forEach((venta: any) &#x3D;&gt; {
+      const fecha &#x3D; new Date(venta.fecha);
+      if (fecha.getFullYear() &#x3D;&#x3D;&#x3D; anioActual) {
+        venta.productos.forEach((producto: any) &#x3D;&gt; {
+          const nombre &#x3D; producto.nombre;
+          if (!conteoProductos[nombre]) {
+            conteoProductos[nombre] &#x3D; 0;
+          }
+          conteoProductos[nombre] +&#x3D; producto.cantidad || 1;
+        });
+      }
+    });
+  
+    const labels &#x3D; Object.keys(conteoProductos);
+    const data &#x3D; Object.values(conteoProductos);
+  
+    // Colores base
+    const backgroundColors &#x3D; [
+      &#x27;#0d6efd&#x27;, &#x27;#6f42c1&#x27;, &#x27;#20c997&#x27;, &#x27;#ffc107&#x27;, &#x27;#dc3545&#x27;,
+      &#x27;#198754&#x27;, &#x27;#6610f2&#x27;, &#x27;#fd7e14&#x27;, &#x27;#0dcaf0&#x27;, &#x27;#adb5bd&#x27;
+    ];
+  
+    if (this.chartProductos) {
+      this.chartProductos.destroy();
+    }
+  
+    const ctx &#x3D; document.getElementById(&#x27;productsChart&#x27;) as HTMLCanvasElement;
+    if (!ctx) return;
+  
+    this.chartProductos &#x3D; new Chart(ctx, {
+      type: &#x27;pie&#x27;,
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: backgroundColors.slice(0, labels.length)
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          title: {
+            display: true,
+            text: &#x27;Productos más vendidos&#x27;
+          }
+        }
+      }
+    });
+  }
+  
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;page-container d-flex flex-column min-vh-100&quot;&gt;
+    &lt;main class&#x3D;&quot;flex-grow-1 container mt-4&quot;&gt;
+    &lt;ul class&#x3D;&quot;nav nav-tabs&quot;&gt;
+      &lt;li class&#x3D;&quot;nav-item&quot;&gt;
+        &lt;button
+          class&#x3D;&quot;nav-link&quot;
+          [class.active]&#x3D;&quot;tabActivo &#x3D;&#x3D;&#x3D; &#x27;usuarios&#x27;&quot;
+          (click)&#x3D;&quot;activarTab(&#x27;usuarios&#x27;)&quot;
+        &gt;
+          Usuarios
+        &lt;/button&gt;
+      &lt;/li&gt;
+      &lt;li class&#x3D;&quot;nav-item&quot;&gt;
+        &lt;button
+          class&#x3D;&quot;nav-link&quot;
+          [class.active]&#x3D;&quot;tabActivo &#x3D;&#x3D;&#x3D; &#x27;metricas&#x27;&quot;
+          (click)&#x3D;&quot;activarTab(&#x27;metricas&#x27;)&quot;
+        &gt;
+          Métricas
+        &lt;/button&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  
+    &lt;div class&#x3D;&quot;tab-content mt-2&quot; *ngIf&#x3D;&quot;tabActivo &#x3D;&#x3D;&#x3D; &#x27;usuarios&#x27;&quot;&gt;
+      &lt;h2 class&#x3D;&quot;text-center&quot;&gt;Usuarios&lt;/h2&gt;
+      &lt;div class&#x3D;&quot;table-responsive&quot;&gt;
+        &lt;table class&#x3D;&quot;table table-striped&quot;&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th&gt;Nombre&lt;/th&gt;
+              &lt;th&gt;Email&lt;/th&gt;
+              &lt;th&gt;Usuario&lt;/th&gt;
+              &lt;th&gt;Tipo&lt;/th&gt;
+              &lt;th&gt;Acciones&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr *ngFor&#x3D;&quot;let usuario of usuarios; let i &#x3D; index&quot;&gt;
+              &lt;td&gt;{{ usuario.nombre }}&lt;/td&gt;
+              &lt;td&gt;{{ usuario.email }}&lt;/td&gt;
+              &lt;td&gt;{{ usuario.username }}&lt;/td&gt;
+              &lt;td&gt;{{ usuario.role }}&lt;/td&gt;
+              &lt;td&gt;
+                &lt;button class&#x3D;&quot;btn btn-sm btn-primary me-2&quot; (click)&#x3D;&quot;editarUsuario(i)&quot;&gt;Editar&lt;/button&gt;
+                &lt;button class&#x3D;&quot;btn btn-sm btn-danger&quot; (click)&#x3D;&quot;eliminarUsuario(i)&quot;&gt;Eliminar&lt;/button&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  
+    &lt;div class&#x3D;&quot;tab-content mt-2&quot; *ngIf&#x3D;&quot;tabActivo &#x3D;&#x3D;&#x3D; &#x27;metricas&#x27;&quot;&gt;
+      &lt;h2 class&#x3D;&quot;text-center&quot;&gt;Métricas&lt;/h2&gt;
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+        &lt;div class&#x3D;&quot;col-md-12&quot;&gt;
+          &lt;canvas id&#x3D;&quot;salesChart&quot;&gt;&lt;/canvas&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+        &lt;div class&#x3D;&quot;col-md-3 col-2&quot;&gt;
+          &lt;canvas id&#x3D;&quot;usersChart&quot; width&#x3D;&quot;100&quot; height&#x3D;&quot;100&quot;&gt;&lt;/canvas&gt;
+
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;col-md-6 col-8&quot;&gt;
+          &lt;canvas id&#x3D;&quot;productsChart&quot; width&#x3D;&quot;100&quot; height&#x3D;&quot;100&quot;&gt;&lt;/canvas&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  
+    &lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;modalEditarUsuario&quot; tabindex&#x3D;&quot;-1&quot; aria-labelledby&#x3D;&quot;modalEditarUsuarioLabel&quot; aria-hidden&#x3D;&quot;true&quot;&gt;
+      &lt;div class&#x3D;&quot;modal-dialog&quot;&gt;
+        &lt;div class&#x3D;&quot;modal-content&quot;&gt;
+          &lt;div class&#x3D;&quot;modal-header&quot;&gt;
+            &lt;h5 class&#x3D;&quot;modal-title&quot; id&#x3D;&quot;modalEditarUsuarioLabel&quot;&gt;Editar Usuario&lt;/h5&gt;
+            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn-close&quot; data-bs-dismiss&#x3D;&quot;modal&quot; aria-label&#x3D;&quot;Cerrar&quot;&gt;&lt;/button&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;modal-body&quot;&gt;
+            &lt;form [formGroup]&#x3D;&quot;usuarioForm&quot;&gt;
+              &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+                &lt;label class&#x3D;&quot;form-label&quot;&gt;Nombre&lt;/label&gt;
+                &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;nombre&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+                &lt;label class&#x3D;&quot;form-label&quot;&gt;Correo&lt;/label&gt;
+                &lt;input type&#x3D;&quot;email&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;email&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+                &lt;label class&#x3D;&quot;form-label&quot;&gt;Usuario&lt;/label&gt;
+                &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;username&quot; /&gt;
+              &lt;/div&gt;
+              &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+                &lt;label class&#x3D;&quot;form-label&quot;&gt;Tipo&lt;/label&gt;
+                &lt;select class&#x3D;&quot;form-select&quot; formControlName&#x3D;&quot;tipo&quot;&gt;
+                  &lt;option value&#x3D;&quot;usuario&quot;&gt;Usuario&lt;/option&gt;
+                  &lt;option value&#x3D;&quot;admin&quot;&gt;Administrador&lt;/option&gt;
+                &lt;/select&gt;
+              &lt;/div&gt;
+            &lt;/form&gt;
+            
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
+            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-secondary&quot; data-bs-dismiss&#x3D;&quot;modal&quot;&gt;Cancelar&lt;/button&gt;
+            &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; (click)&#x3D;&quot;guardarCambios()&quot;&gt;Guardar cambios&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/main&gt;
+&lt;/div&gt;
+
+  </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./admin-panel.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="page-container d-flex flex-column min-vh-100">    <main class="flex-grow-1 container mt-4">    <ul class="nav nav-tabs">      <li class="nav-item">        <button          class="nav-link"          [class.active]="tabActivo === \'usuarios\'"          (click)="activarTab(\'usuarios\')"        >          Usuarios        </button>      </li>      <li class="nav-item">        <button          class="nav-link"          [class.active]="tabActivo === \'metricas\'"          (click)="activarTab(\'metricas\')"        >          Métricas        </button>      </li>    </ul>      <div class="tab-content mt-2" *ngIf="tabActivo === \'usuarios\'">      <h2 class="text-center">Usuarios</h2>      <div class="table-responsive">        <table class="table table-striped">          <thead>            <tr>              <th>Nombre</th>              <th>Email</th>              <th>Usuario</th>              <th>Tipo</th>              <th>Acciones</th>            </tr>          </thead>          <tbody>            <tr *ngFor="let usuario of usuarios; let i = index">              <td>{{ usuario.nombre }}</td>              <td>{{ usuario.email }}</td>              <td>{{ usuario.username }}</td>              <td>{{ usuario.role }}</td>              <td>                <button class="btn btn-sm btn-primary me-2" (click)="editarUsuario(i)">Editar</button>                <button class="btn btn-sm btn-danger" (click)="eliminarUsuario(i)">Eliminar</button>              </td>            </tr>          </tbody>        </table>      </div>    </div>      <div class="tab-content mt-2" *ngIf="tabActivo === \'metricas\'">      <h2 class="text-center">Métricas</h2>      <div class="row">        <div class="col-md-12">          <canvas id="salesChart"></canvas>        </div>      </div>      <div class="row">        <div class="col-md-3 col-2">          <canvas id="usersChart" width="100" height="100"></canvas>        </div>        <div class="col-md-6 col-8">          <canvas id="productsChart" width="100" height="100"></canvas>        </div>      </div>    </div>      <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="modalEditarUsuarioLabel" aria-hidden="true">      <div class="modal-dialog">        <div class="modal-content">          <div class="modal-header">            <h5 class="modal-title" id="modalEditarUsuarioLabel">Editar Usuario</h5>            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>          </div>          <div class="modal-body">            <form [formGroup]="usuarioForm">              <div class="mb-3">                <label class="form-label">Nombre</label>                <input type="text" class="form-control" formControlName="nombre" />              </div>              <div class="mb-3">                <label class="form-label">Correo</label>                <input type="email" class="form-control" formControlName="email" />              </div>              <div class="mb-3">                <label class="form-label">Usuario</label>                <input type="text" class="form-control" formControlName="username" />              </div>              <div class="mb-3">                <label class="form-label">Tipo</label>                <select class="form-select" formControlName="tipo">                  <option value="usuario">Usuario</option>                  <option value="admin">Administrador</option>                </select>              </div>            </form>                      </div>          <div class="modal-footer">            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>            <button type="button" class="btn btn-primary" (click)="guardarCambios()">Guardar cambios</button>          </div>        </div>      </div>    </div></main></div>  </div>'
+    var COMPONENTS = [{'name': 'AdminPanelComponent', 'selector': 'app-admin-panel'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarritoComponent', 'selector': 'app-carrito'},{'name': 'CategoriaProductoComponent', 'selector': 'app-categoria-producto'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'RecuperarPwComponent', 'selector': 'app-recuperar-pw'},{'name': 'RegistroComponent', 'selector': 'app-registro'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'AdminPanelComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'AdminPanelComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

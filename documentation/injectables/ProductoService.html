@@ -1,0 +1,876 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>frontned documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">frontned documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >ProductoService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/producto/producto.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Servicio para manejar productos de un catálogo de juegos de mesa.
+Proporciona métodos para obtener todos los productos y filtrar por categoría.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">const productoService = new ProductoService();
+const allProductos = productoService.getAllProductos();
+const juegosDeMesa = productoService.getProductosByCategoryId(1);</code></pre></div>
+            </p>
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#productos" >productos</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getAllProductos" >getAllProductos</a>
+                            </li>
+                            <li>
+                                <a href="#getProductosByCategoryId" >getProductosByCategoryId</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="211" class="link-to-prism">src/app/services/producto/producto.service.ts:211</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Crea una instancia del servicio ProductoService.
+Este servicio no requiere parámetros en su constructor.</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllProductos"></a>
+                    <span class="name">
+                        <span ><b>getAllProductos</b></span>
+                        <a href="#getAllProductos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAllProductos()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="224"
+                                    class="link-to-prism">src/app/services/producto/producto.service.ts:224</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene todos los productos del catálogo.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>{}</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Lista de productos.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getProductosByCategoryId"></a>
+                    <span class="name">
+                        <span ><b>getProductosByCategoryId</b></span>
+                        <a href="#getProductosByCategoryId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getProductosByCategoryId(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="233"
+                                    class="link-to-prism">src/app/services/producto/producto.service.ts:233</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene todos los productos del catálogo.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Lista de productos.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="productos"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>productos</b></span>
+                        <a href="#productos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Producto.html" target="_self" >Producto[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+    id: 1,
+    name: &#x27;Arkham Horror 3ra Edición&#x27;,
+    price: 59990,
+    categoryId: 1,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/arkham.webp&#x27;
+  },
+  {
+    id: 2,
+    name: &#x27;Clank Legacy&#x27;,
+    price: 102990,
+    categoryId: 1,
+    description: &#x27;Vive una campaña épica con decisiones permanentes mientras construyes tu propio universo de Clank. ¡Riesgo, estrategia y aventura garantizada!&#x27;,
+    imageUrl: &#x27;assets/juegos/clank-legacy.webp&#x27;
+  },
+  {
+    id: 3,
+    name: &#x27;Clank: Tesoros Sumergidos&#x27;,
+    price: 29990,
+    categoryId: 1,
+    description: &#x27;Una expansión acuática para Clank que te desafía a saquear tesoros en un mundo sumergido. ¡Ten cuidado con lo que acecha bajo el agua!&#x27;,
+    imageUrl: &#x27;assets/juegos/clan-tesoros-sumergidos.webp&#x27;
+  },
+  {
+    id: 4,
+    name: &#x27;Dungeon Legends&#x27;,
+    price: 39990,
+    categoryId: 1,
+    description: &#x27;Forma tu equipo de héroes y explora calabozos llenos de peligros, enemigos y secretos en este emocionante juego de fantasía táctica.&#x27;,
+    imageUrl: &#x27;assets/juegos/dungeon-legends.jpg&#x27;
+  },
+  {
+    id: 5,
+    name: &#x27;Eldritch Horror&#x27;,
+    price: 49990,
+    categoryId: 1,
+    description: &#x27;Viaja por el mundo enfrentando horrores cósmicos en esta épica cooperativa inspirada en los mitos de Lovecraft. ¿Podrás salvar la humanidad?&#x27;,
+    imageUrl: &#x27;assets/juegos/Eldritch-Horror.webp&#x27;
+  },
+  {
+    id: 6,
+    name: &#x27;Descent Leyendas de las Tinieblas&#x27;,
+    price: 99990,
+    categoryId: 1,
+    description: &#x27;Embárcate en una campaña narrativa inmersiva con miniaturas detalladas, combates intensos y una app que guía cada paso de tu aventura.&#x27;,
+    imageUrl: &#x27;assets/juegos/descent-leyendas-de-las-tinieblas.webp&#x27;
+  },
+  {
+    id: 7,
+    name: &#x27;Las Leyendas de Andor&#x27;,
+    price: 73990,
+    categoryId: 2,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/las-leyendas-de-andor.webp&#x27;
+  },
+  {
+    id: 8,
+    name: &#x27;Robin Hood&#x27;,
+    price: 59990,
+    categoryId: 2,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/robin-hood.webp&#x27;
+  },
+  {
+    id: 9,
+    name: &#x27;Tobago&#x27;,
+    price: 73990,
+    categoryId: 2,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/tobago.jpg&#x27;
+  },
+  {
+    id: 10,
+    name: &#x27;Treos&#x27;,
+    price: 73990,
+    categoryId: 2,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/treos.jpg&#x27;
+  },
+  {
+    id: 11,
+    name: &#x27;La comunidad del Anillo: El juego de cartas&#x27;,
+    price: 73990,
+    categoryId: 2,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/la-comunidad-anillo.jpg&#x27;
+  },
+  {
+    id: 12,
+    name: &#x27;Trekking Through History&#x27;,
+    price: 73990,
+    categoryId: 2,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/trekking-through-history.webp&#x27;
+  },
+  {
+    id: 13,
+    name: &#x27;Bang!&#x27;,
+    price: 18990,
+    categoryId: 3,
+    description: &#x27;Un clásico del Lejano Oeste donde los forajidos, el sheriff y los renegados se enfrentan en un duelo estratégico lleno de engaños y acción.&#x27;,
+    imageUrl: &#x27;assets/juegos/bang.webp&#x27;
+  },
+  {
+    id: 14,
+    name: &#x27;¡A Prueba de Retos!&#x27;,
+    price: 22990,
+    categoryId: 3,
+    description: &#x27;Un dinámico party game lleno de pruebas físicas y mentales que pondrán a prueba tu creatividad, rapidez y capacidad para hacer reír a todos.&#x27;,
+    imageUrl: &#x27;assets/juegos/a-prueba-de-retos.webp&#x27;
+  },
+  {
+    id: 15,
+    name: &#x27;Chupilca&#x27;,
+    price: 14990,
+    categoryId: 3,
+    description: &#x27;Un juego irreverente y social inspirado en la cultura chilena, ideal para romper el hielo y crear anécdotas inolvidables con tus amigos.&#x27;,
+    imageUrl: &#x27;assets/juegos/chupilca.webp&#x27;
+  },
+  {
+    id: 16,
+    name: &#x27;Burguer Ya&#x27;,
+    price: 19990,
+    categoryId: 3,
+    description: &#x27;¡Conviértete en el chef más veloz! Compite por armar las hamburguesas correctas antes que tus rivales en este juego rápido y sabroso.&#x27;,
+    imageUrl: &#x27;assets/juegos/burger-ya.webp&#x27;
+  },
+  {
+    id: 17,
+    name: &#x27;Detectives Paranormales&#x27;,
+    price: 33990,
+    categoryId: 3,
+    description: &#x27;Investiga crímenes desde el más allá resolviendo misterios con la ayuda de pistas espirituales. ¡Ideal para los fans del suspenso sobrenatural!&#x27;,
+    imageUrl: &#x27;assets/juegos/detectives-paranormales.webp&#x27;
+  },
+  {
+    id: 18,
+    name: &#x27;¡Bang! Explosión de dados&#x27;,
+    price: 0,
+    categoryId: 4,
+    description: &#x27;Un juego rápido y lleno de tensión donde el sheriff, sus ayudantes, bandidos y renegados se enfrentan en el Salvaje Oeste. Usa dados para atacar, curarte o hacer explotar dinamita. Ideal para partidas rápidas con muchos jugadores.&#x27;,
+    imageUrl: &#x27;assets/juegos/bang-explosion-dados.jpg&#x27;
+  },
+  {
+    id: 19,
+    name: &#x27;Crea el Cosmos&#x27;,
+    price: 0,
+    categoryId: 4,
+    description: &#x27;Conviértete en una deidad en formación mientras construyes tu propio sistema solar. Combina ciencia y estrategia para crear planetas, estrellas y vida, compitiendo por tener el cosmos más perfecto.&#x27;,
+    imageUrl: &#x27;assets/juegos/crea-el-cosmos.jpg&#x27;
+  },
+  {
+    id: 20,
+    name: &#x27;Happy Mochi&#x27;,
+    price: 0,
+    categoryId: 4,
+    description: &#x27;Un adorable juego de recolección en el que los jugadores compiten por hacer la bandeja de mochi más sabrosa y colorida. Fácil de aprender, con arte encantador y perfecto para toda la familia.&#x27;,
+    imageUrl: &#x27;assets/juegos/happy-mochi.jpg&#x27;
+  },
+  {
+    id: 21,
+    name: &#x27;Marvel Champions LCG - Heroes Reunidos 3&#x27;,
+    price: 0,
+    categoryId: 4,
+    description: &#x27;Un juego de cartas cooperativo donde los jugadores encarnan a héroes del universo Marvel enfrentando amenazas globales. Este pack incluye nuevos personajes, villanos y escenarios para expandir tu experiencia.&#x27;,
+    imageUrl: &#x27;assets/juegos/marvel-champion.webp&#x27;
+  },
+  {
+    id: 22,
+    name: &#x27;Splendor&#x27;,
+    price: 0,
+    categoryId: 4,
+    description: &#x27;Un clásico de la estrategia donde los jugadores asumen el rol de mercaderes renacentistas. Recolecta gemas, compra cartas y atrae nobles para alcanzar la victoria. Rápido, elegante y competitivo.&#x27;,
+    imageUrl: &#x27;assets/juegos/splendor.jpg&#x27;
+  }
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/services/producto/producto.service.ts:34</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Lista de productos del catálogo.
+Cada producto tiene un id, nombre, precio, categoría, descripción e imagen.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { Producto } from &#x27;src/app/models/producto.model&#x27;;
+/**
+ * @module ProductoService
+ * @description
+ * Servicio para manejar productos de un catálogo de juegos de mesa.
+ * Proporciona métodos para obtener todos los productos y filtrar por categoría.
+ * @example
+ * const productoService &#x3D; new ProductoService();
+ * const allProductos &#x3D; productoService.getAllProductos();
+ * const juegosDeMesa &#x3D; productoService.getProductosByCategoryId(1);
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+/**
+ * @description
+ * Servicio para manejar productos de un catálogo de juegos de mesa.
+ * Proporciona métodos para obtener todos los productos y filtrar por categoría.
+ * @class ProductoService
+ * @example
+ * const productoService &#x3D; new ProductoService();
+ * const allProductos &#x3D; productoService.getAllProductos();
+ * const juegosDeMesa &#x3D; productoService.getProductosByCategoryId(1);
+ */
+export class ProductoService {
+  /** 
+   * @description
+   * Lista de productos del catálogo.
+   * Cada producto tiene un id, nombre, precio, categoría, descripción e imagen.
+   * @type {Producto[]}
+   * @property {number} id - Identificador único del producto.
+   */
+  private productos:Producto []&#x3D;[
+    {
+    id: 1,
+    name: &#x27;Arkham Horror 3ra Edición&#x27;,
+    price: 59990,
+    categoryId: 1,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/arkham.webp&#x27;
+  },
+  {
+    id: 2,
+    name: &#x27;Clank Legacy&#x27;,
+    price: 102990,
+    categoryId: 1,
+    description: &#x27;Vive una campaña épica con decisiones permanentes mientras construyes tu propio universo de Clank. ¡Riesgo, estrategia y aventura garantizada!&#x27;,
+    imageUrl: &#x27;assets/juegos/clank-legacy.webp&#x27;
+  },
+  {
+    id: 3,
+    name: &#x27;Clank: Tesoros Sumergidos&#x27;,
+    price: 29990,
+    categoryId: 1,
+    description: &#x27;Una expansión acuática para Clank que te desafía a saquear tesoros en un mundo sumergido. ¡Ten cuidado con lo que acecha bajo el agua!&#x27;,
+    imageUrl: &#x27;assets/juegos/clan-tesoros-sumergidos.webp&#x27;
+  },
+  {
+    id: 4,
+    name: &#x27;Dungeon Legends&#x27;,
+    price: 39990,
+    categoryId: 1,
+    description: &#x27;Forma tu equipo de héroes y explora calabozos llenos de peligros, enemigos y secretos en este emocionante juego de fantasía táctica.&#x27;,
+    imageUrl: &#x27;assets/juegos/dungeon-legends.jpg&#x27;
+  },
+  {
+    id: 5,
+    name: &#x27;Eldritch Horror&#x27;,
+    price: 49990,
+    categoryId: 1,
+    description: &#x27;Viaja por el mundo enfrentando horrores cósmicos en esta épica cooperativa inspirada en los mitos de Lovecraft. ¿Podrás salvar la humanidad?&#x27;,
+    imageUrl: &#x27;assets/juegos/Eldritch-Horror.webp&#x27;
+  },
+  {
+    id: 6,
+    name: &#x27;Descent Leyendas de las Tinieblas&#x27;,
+    price: 99990,
+    categoryId: 1,
+    description: &#x27;Embárcate en una campaña narrativa inmersiva con miniaturas detalladas, combates intensos y una app que guía cada paso de tu aventura.&#x27;,
+    imageUrl: &#x27;assets/juegos/descent-leyendas-de-las-tinieblas.webp&#x27;
+  },
+  {
+    id: 7,
+    name: &#x27;Las Leyendas de Andor&#x27;,
+    price: 73990,
+    categoryId: 2,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/las-leyendas-de-andor.webp&#x27;
+  },
+  {
+    id: 8,
+    name: &#x27;Robin Hood&#x27;,
+    price: 59990,
+    categoryId: 2,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/robin-hood.webp&#x27;
+  },
+  {
+    id: 9,
+    name: &#x27;Tobago&#x27;,
+    price: 73990,
+    categoryId: 2,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/tobago.jpg&#x27;
+  },
+  {
+    id: 10,
+    name: &#x27;Treos&#x27;,
+    price: 73990,
+    categoryId: 2,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/treos.jpg&#x27;
+  },
+  {
+    id: 11,
+    name: &#x27;La comunidad del Anillo: El juego de cartas&#x27;,
+    price: 73990,
+    categoryId: 2,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/la-comunidad-anillo.jpg&#x27;
+  },
+  {
+    id: 12,
+    name: &#x27;Trekking Through History&#x27;,
+    price: 73990,
+    categoryId: 2,
+    description: &#x27;Explora los misterios sobrenaturales de Arkham en este juego cooperativo lleno de investigación, monstruos y decisiones críticas.&#x27;,
+    imageUrl: &#x27;assets/juegos/trekking-through-history.webp&#x27;
+  },
+  {
+    id: 13,
+    name: &#x27;Bang!&#x27;,
+    price: 18990,
+    categoryId: 3,
+    description: &#x27;Un clásico del Lejano Oeste donde los forajidos, el sheriff y los renegados se enfrentan en un duelo estratégico lleno de engaños y acción.&#x27;,
+    imageUrl: &#x27;assets/juegos/bang.webp&#x27;
+  },
+  {
+    id: 14,
+    name: &#x27;¡A Prueba de Retos!&#x27;,
+    price: 22990,
+    categoryId: 3,
+    description: &#x27;Un dinámico party game lleno de pruebas físicas y mentales que pondrán a prueba tu creatividad, rapidez y capacidad para hacer reír a todos.&#x27;,
+    imageUrl: &#x27;assets/juegos/a-prueba-de-retos.webp&#x27;
+  },
+  {
+    id: 15,
+    name: &#x27;Chupilca&#x27;,
+    price: 14990,
+    categoryId: 3,
+    description: &#x27;Un juego irreverente y social inspirado en la cultura chilena, ideal para romper el hielo y crear anécdotas inolvidables con tus amigos.&#x27;,
+    imageUrl: &#x27;assets/juegos/chupilca.webp&#x27;
+  },
+  {
+    id: 16,
+    name: &#x27;Burguer Ya&#x27;,
+    price: 19990,
+    categoryId: 3,
+    description: &#x27;¡Conviértete en el chef más veloz! Compite por armar las hamburguesas correctas antes que tus rivales en este juego rápido y sabroso.&#x27;,
+    imageUrl: &#x27;assets/juegos/burger-ya.webp&#x27;
+  },
+  {
+    id: 17,
+    name: &#x27;Detectives Paranormales&#x27;,
+    price: 33990,
+    categoryId: 3,
+    description: &#x27;Investiga crímenes desde el más allá resolviendo misterios con la ayuda de pistas espirituales. ¡Ideal para los fans del suspenso sobrenatural!&#x27;,
+    imageUrl: &#x27;assets/juegos/detectives-paranormales.webp&#x27;
+  },
+  {
+    id: 18,
+    name: &#x27;¡Bang! Explosión de dados&#x27;,
+    price: 0,
+    categoryId: 4,
+    description: &#x27;Un juego rápido y lleno de tensión donde el sheriff, sus ayudantes, bandidos y renegados se enfrentan en el Salvaje Oeste. Usa dados para atacar, curarte o hacer explotar dinamita. Ideal para partidas rápidas con muchos jugadores.&#x27;,
+    imageUrl: &#x27;assets/juegos/bang-explosion-dados.jpg&#x27;
+  },
+  {
+    id: 19,
+    name: &#x27;Crea el Cosmos&#x27;,
+    price: 0,
+    categoryId: 4,
+    description: &#x27;Conviértete en una deidad en formación mientras construyes tu propio sistema solar. Combina ciencia y estrategia para crear planetas, estrellas y vida, compitiendo por tener el cosmos más perfecto.&#x27;,
+    imageUrl: &#x27;assets/juegos/crea-el-cosmos.jpg&#x27;
+  },
+  {
+    id: 20,
+    name: &#x27;Happy Mochi&#x27;,
+    price: 0,
+    categoryId: 4,
+    description: &#x27;Un adorable juego de recolección en el que los jugadores compiten por hacer la bandeja de mochi más sabrosa y colorida. Fácil de aprender, con arte encantador y perfecto para toda la familia.&#x27;,
+    imageUrl: &#x27;assets/juegos/happy-mochi.jpg&#x27;
+  },
+  {
+    id: 21,
+    name: &#x27;Marvel Champions LCG - Heroes Reunidos 3&#x27;,
+    price: 0,
+    categoryId: 4,
+    description: &#x27;Un juego de cartas cooperativo donde los jugadores encarnan a héroes del universo Marvel enfrentando amenazas globales. Este pack incluye nuevos personajes, villanos y escenarios para expandir tu experiencia.&#x27;,
+    imageUrl: &#x27;assets/juegos/marvel-champion.webp&#x27;
+  },
+  {
+    id: 22,
+    name: &#x27;Splendor&#x27;,
+    price: 0,
+    categoryId: 4,
+    description: &#x27;Un clásico de la estrategia donde los jugadores asumen el rol de mercaderes renacentistas. Recolecta gemas, compra cartas y atrae nobles para alcanzar la victoria. Rápido, elegante y competitivo.&#x27;,
+    imageUrl: &#x27;assets/juegos/splendor.jpg&#x27;
+  }
+  ]
+  /**
+   * @description
+   * Crea una instancia del servicio ProductoService.
+   * Este servicio no requiere parámetros en su constructor.
+   */
+  constructor() { }
+
+  /**
+   * @description
+   * Obtiene todos los productos del catálogo.
+   * @returns {Producto[]} Lista de productos.
+   */
+  getAllProductos(){
+    return this.productos;
+  }
+
+  /**
+   * @description
+   * Obtiene todos los productos del catálogo.
+   * @returns {Producto[]} Lista de productos.
+   */
+  getProductosByCategoryId(id:number){
+    return this.productos.filter(p&#x3D;&gt; p.categoryId&#x3D;&#x3D;id);
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'ProductoService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

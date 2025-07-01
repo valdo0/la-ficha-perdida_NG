@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RecuperarPwRoutingModule } from './recuperar-pw-routing.module';
 import { RecuperarPwComponent } from './recuperar-pw.component';
 import { ComponentsModule } from 'src/app/components/layout/components.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ComponentsModule } from 'src/app/components/layout/components.module';
   imports: [
     CommonModule,
     RecuperarPwRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    ReactiveFormsModule
   ]
 })
 export class RecuperarPwModule { }

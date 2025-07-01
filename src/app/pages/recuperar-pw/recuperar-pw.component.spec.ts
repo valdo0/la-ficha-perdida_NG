@@ -4,6 +4,7 @@ import { RecuperarPwComponent } from './recuperar-pw.component';
 import { ComponentsModule } from 'src/app/components/layout/components.module';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('RecuperarPwComponent', () => {
   let component: RecuperarPwComponent;
@@ -12,7 +13,7 @@ describe('RecuperarPwComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [RecuperarPwComponent],
-      imports: [ComponentsModule],
+      imports: [ComponentsModule,ReactiveFormsModule],
       providers: [
         {
           provide: ActivatedRoute,

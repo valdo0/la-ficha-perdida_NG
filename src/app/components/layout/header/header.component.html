@@ -2,7 +2,6 @@
   <nav class="navbar navbar-expand-lg px-4">
     <div class="container d-flex align-items-center position-relative">
       
-      <!-- Botón hamburguesa (solo visible en móvil) -->
       <button
         class="navbar-toggler me-2 d-lg-none order-1 "
         type="button"
@@ -15,7 +14,6 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Logo -->
       <a
         class="navbar-brand order-2 order-lg-1 mx-auto mx-lg-0"
         href="#"
@@ -27,11 +25,9 @@
         />
       </a>
 
-      <!-- Placeholder solo en móvil para centrar el logo -->
       <div class="d-lg-none order-3" style="width: 40px;"></div>
     </div>
 
-    <!-- Menú de navegación (colapsa en móvil) -->
     <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center text-lg-start">
         <li class="nav-item">
@@ -54,6 +50,9 @@
         </li>
         <li class="nav-item" *ngIf="!isAdmin && isLoggedIn">
           <a class="nav-link" routerLink="/carrito" routerLinkActive="active">Carrito</a>
+        </li>
+        <li class="nav-item" *ngIf="!isAdmin && isLoggedIn">
+          <a class="nav-link" routerLink="/perfil" routerLinkActive="active">Perfil</a>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
           <a class="nav-link" href="/home" (click)="logout()">Logout</a>

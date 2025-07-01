@@ -1,5 +1,4 @@
 <div class="page-container d-flex flex-column min-vh-100">
-    <app-header></app-header>
     <main class="flex-grow-1 container mt-4">
     <ul class="nav nav-tabs">
       <li class="nav-item">
@@ -54,13 +53,21 @@
     <div class="tab-content mt-2" *ngIf="tabActivo === 'metricas'">
       <h2 class="text-center">Métricas</h2>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <canvas id="salesChart"></canvas>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-2">
+          <canvas id="usersChart" width="100" height="100"></canvas>
+
+        </div>
+        <div class="col-md-6 col-8">
+          <canvas id="productsChart" width="100" height="100"></canvas>
         </div>
       </div>
     </div>
   
-    <!-- Modal -->
     <div class="modal fade" id="modalEditarUsuario" tabindex="-1" aria-labelledby="modalEditarUsuarioLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -69,27 +76,28 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form [formGroup]="usuarioForm">
               <div class="mb-3">
                 <label class="form-label">Nombre</label>
-                <input type="text" class="form-control" [(ngModel)]="usuarioEditando.nombre" name="nombre" />
+                <input type="text" class="form-control" formControlName="nombre" />
               </div>
               <div class="mb-3">
                 <label class="form-label">Correo</label>
-                <input type="email" class="form-control" [(ngModel)]="usuarioEditando.email" name="email" />
+                <input type="email" class="form-control" formControlName="email" />
               </div>
               <div class="mb-3">
                 <label class="form-label">Usuario</label>
-                <input type="text" class="form-control" [(ngModel)]="usuarioEditando.username" name="usuario" />
+                <input type="text" class="form-control" formControlName="username" />
               </div>
               <div class="mb-3">
                 <label class="form-label">Tipo</label>
-                <select class="form-select" [(ngModel)]="usuarioEditando.tipo" name="tipo">
+                <select class="form-select" formControlName="tipo">
                   <option value="usuario">Usuario</option>
                   <option value="admin">Administrador</option>
                 </select>
               </div>
             </form>
+            
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -99,7 +107,6 @@
       </div>
     </div>
 </main>
-<app-footer></app-footer>
 </div>
 
   

@@ -4,7 +4,7 @@ import { AdminPanelComponent } from './admin-panel.component';
 import { ComponentsModule } from 'src/app/components/layout/components.module';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('AdminPanelComponent', () => {
   let component: AdminPanelComponent;
@@ -13,7 +13,7 @@ describe('AdminPanelComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AdminPanelComponent],
-      imports: [ComponentsModule,FormsModule],
+      imports: [ComponentsModule,FormsModule,ReactiveFormsModule],
       providers: [
         {
           provide: ActivatedRoute,

@@ -1,0 +1,1320 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>frontned documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">frontned documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  RegistroComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/pages/registro/registro.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p> @description
+Componente para el registro de usuarios en la aplicación.
+Permite a los usuarios crear una cuenta proporcionando su información personal y credenciales.
+Utiliza un formulario reactivo para capturar los datos del usuario y validar los campos.
+Al enviar el formulario, se registra al usuario a través del servicio de autenticación.
+Muestra mensajes de éxito o error según el resultado del registro.</p>
+
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-registro</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./registro.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./registro.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#confirmPassword" >confirmPassword</a>
+                            </li>
+                            <li>
+                                <a href="#correo" >correo</a>
+                            </li>
+                            <li>
+                                <a href="#direccion" >direccion</a>
+                            </li>
+                            <li>
+                                <a href="#fecNacimiento" >fecNacimiento</a>
+                            </li>
+                            <li>
+                                <a href="#nombre" >nombre</a>
+                            </li>
+                            <li>
+                                <a href="#password" >password</a>
+                            </li>
+                            <li>
+                                <a href="#registroForm" >registroForm</a>
+                            </li>
+                            <li>
+                                <a href="#username" >username</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#f" >f</a>
+                                </li>
+                                <li>
+                                    <a href="#passwordsNoSonIguales" >passwordsNoSonIguales</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, router: Router, fb: FormBuilder)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/pages/registro/registro.component.ts:97</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Constructor del componente RegistroComponent.
+Inicializa el formulario reactivo y los servicios necesarios.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>fb</td>
+                                                  
+                                                        <td>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/pages/registro/registro.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Método que se ejecuta al inicializar el componente.
+Crea el formulario reactivo con sus respectivos controles y validaciones.
+Utiliza el FormBuilder para definir los controles del formulario y sus validaciones.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">src/app/pages/registro/registro.component.ts:148</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Maneja el envío del formulario de registro.
+Valida el formulario y, si es válido, registra al usuario.
+Muestra un mensaje de éxito y redirige al usuario a la página de inicio de sesión.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmPassword"></a>
+                    <span class="name">
+                        <span ><b>confirmPassword</b></span>
+                        <a href="#confirmPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/pages/registro/registro.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Confirmación de la contraseña del usuario.
+Este campo es obligatorio y se valida para asegurarse de que coincida con el campo de contraseña.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html"></code></pre></div></div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="correo"></a>
+                    <span class="name">
+                        <span ><b>correo</b></span>
+                        <a href="#correo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/pages/registro/registro.component.ts:79</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Correo electrónico del usuario.
+Este campo es obligatorio y se valida para asegurarse de que tenga un formato de correo electrónico válido.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html"></code></pre></div></div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="direccion"></a>
+                    <span class="name">
+                        <span ><b>direccion</b></span>
+                        <a href="#direccion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/pages/registro/registro.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Dirección del usuario.
+Este campo es opcional y puede dejarse vacío.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html"></code></pre></div></div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fecNacimiento"></a>
+                    <span class="name">
+                        <span ><b>fecNacimiento</b></span>
+                        <a href="#fecNacimiento"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/pages/registro/registro.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Fecha de nacimiento del usuario.
+Este campo es obligatorio y se valida para asegurarse de que el usuario tenga al menos 13 años.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html"></code></pre></div></div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="nombre"></a>
+                    <span class="name">
+                        <span ><b>nombre</b></span>
+                        <a href="#nombre"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/pages/registro/registro.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Nombre del usuario.
+Este campo es obligatorio y se valida para asegurarse de que no esté vacío.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html"></code></pre></div></div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="password"></a>
+                    <span class="name">
+                        <span ><b>password</b></span>
+                        <a href="#password"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/pages/registro/registro.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Contraseña del usuario.
+Este campo es obligatorio y se valida para asegurarse de que tenga una longitud mínima de 6 caracteres y máxima de 18.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html"></code></pre></div></div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registroForm"></a>
+                    <span class="name">
+                        <span ><b>registroForm</b></span>
+                        <a href="#registroForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FormGroup</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/registro/registro.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Formulario reactivo para el registro de usuarios.
+Contiene campos como username, nombre, fecha de nacimiento, dirección, correo y contraseña.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="username"></a>
+                    <span class="name">
+                        <span ><b>username</b></span>
+                        <a href="#username"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/registro/registro.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Propiedades para almacenar los datos del formulario de registro.
+Incluyen username, nombre, fecha de nacimiento, dirección, correo y contraseña.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="f"></a>
+                        <span class="name"><b>f</b><a href="#f"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>f()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="184" class="link-to-prism">src/app/pages/registro/registro.component.ts:184</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Obtiene los controles del formulario de registro.
+Permite acceder a los controles del formulario de manera más sencilla en la plantilla.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">this.f.username.value // Obtiene el valor del campo username del formulario.</code></pre></div></div>
+
+                                <div>
+                                        <b>Example :</b>
+                                            <div>
+                                                <pre class="line-numbers"><code class="language-html">this.f.username.value // Obtiene el valor del campo username del formulario.</code></pre>
+                                            </div>
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="passwordsNoSonIguales"></a>
+                        <span class="name"><b>passwordsNoSonIguales</b><a href="#passwordsNoSonIguales"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>passwordsNoSonIguales()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="193" class="link-to-prism">src/app/pages/registro/registro.component.ts:193</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Verifica si el campo de nombre de usuario es inválido y ha sido tocado.</p>
+</div>
+
+                                <div>
+                                </div>
+                        </td>
+                    </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { AuthService } from &#x27;src/app/services/auth/auth.service&#x27;;
+import {
+  minAgeValidator,
+  passwordsIgualesValidator,
+} from &#x27;src/app/validators/custom-validators&#x27;;
+import Swal from &#x27;sweetalert2&#x27;;
+/**
+ *  @description
+ * Componente para el registro de usuarios en la aplicación.
+ * Permite a los usuarios crear una cuenta proporcionando su información personal y credenciales.
+ * Utiliza un formulario reactivo para capturar los datos del usuario y validar los campos.
+ * Al enviar el formulario, se registra al usuario a través del servicio de autenticación.
+ * Muestra mensajes de éxito o error según el resultado del registro.
+ */
+@Component({
+  selector: &#x27;app-registro&#x27;,
+  templateUrl: &#x27;./registro.component.html&#x27;,
+  styleUrls: [&#x27;./registro.component.css&#x27;],
+})
+/**
+ * @description
+ * Componente para el registro de usuarios.
+ * Utiliza un formulario reactivo para capturar los datos del usuario.
+ * Valida los campos del formulario y muestra mensajes de error si es necesario.
+ * Al enviar el formulario, registra al usuario a través del servicio de autenticación.
+ * Muestra un mensaje de éxito al completar el registro y redirige al usuario a la página de inicio de sesión.
+ */
+export class RegistroComponent {
+  /**
+   * @description
+   * Formulario reactivo para el registro de usuarios.
+   * Contiene campos como username, nombre, fecha de nacimiento, dirección, correo y contraseña.
+   */
+  registroForm!: FormGroup;
+  /**
+   * @description
+   * Propiedades para almacenar los datos del formulario de registro.
+   * Incluyen username, nombre, fecha de nacimiento, dirección, correo y contraseña.
+   */
+  username: string &#x3D; &#x27;&#x27;;
+  /**
+   * @description
+   * Nombre del usuario.
+   * Este campo es obligatorio y se valida para asegurarse de que no esté vacío.
+   * @type {string}
+   * @default &#x27;&#x27;
+   * @example &#x27;Juan Perez&#x27;
+   */
+  nombre: string &#x3D; &#x27;&#x27;;
+  /**
+   * @description
+   * Fecha de nacimiento del usuario.
+   * Este campo es obligatorio y se valida para asegurarse de que el usuario tenga al menos 13 años.
+   * @type {string}
+   * @default &#x27;&#x27;
+   * @example &#x27;2000-01-01&#x27;
+   */
+  fecNacimiento: string &#x3D; &#x27;&#x27;;
+  /**
+   * @description
+   * Dirección del usuario.
+   * Este campo es opcional y puede dejarse vacío.
+   * @type {string}
+   * @default &#x27;&#x27;
+   * @example &#x27;Calle Falsa 123&#x27;
+   */
+  direccion: string &#x3D; &#x27;&#x27;;
+  /**
+   * @description
+   * Correo electrónico del usuario.
+   * Este campo es obligatorio y se valida para asegurarse de que tenga un formato de correo electrónico válido.
+   * @type {string}
+   * @default &#x27;&#x27;
+   * @example &#x27;asd@asd.cl&#x27;
+   */
+  correo: string &#x3D; &#x27;&#x27;;
+  /**
+   * @description
+   * Contraseña del usuario.
+   * Este campo es obligatorio y se valida para asegurarse de que tenga una longitud mínima de 6 caracteres y máxima de 18.
+   * @type {string}
+   * @default &#x27;&#x27;
+   * @example &#x27;password123&#x27;
+   */
+  password: string &#x3D; &#x27;&#x27;;
+  /**
+   * @description
+   * Confirmación de la contraseña del usuario.
+   * Este campo es obligatorio y se valida para asegurarse de que coincida con el campo de contraseña.
+   * @type {string}
+   * @default &#x27;&#x27;
+   * @example &#x27;password123&#x27;
+   */
+  confirmPassword: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * @description
+   * Constructor del componente RegistroComponent.
+   * Inicializa el formulario reactivo y los servicios necesarios.
+   * @param authService 
+   * @param router 
+   * @param fb 
+   */
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {}
+  /**
+   * @description
+   * Método que se ejecuta al inicializar el componente.
+   * Crea el formulario reactivo con sus respectivos controles y validaciones.
+   * Utiliza el FormBuilder para definir los controles del formulario y sus validaciones.
+   * @returns {void}
+   */
+  ngOnInit(): void {
+    this.registroForm &#x3D; this.fb.group(
+      {
+        username: [&#x27;&#x27;, [Validators.required]],
+        nombre: [&#x27;&#x27;, [Validators.required]],
+        fecNacimiento: [&#x27;&#x27;, [Validators.required, minAgeValidator(13)]],
+        direccion: [&#x27;&#x27;],
+        correo: [&#x27;&#x27;, [Validators.required, Validators.email]],
+        password: [
+          &#x27;&#x27;,
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(18),
+          ],
+        ],
+        confirmPassword: [&#x27;&#x27;, [Validators.required]],
+      },
+      {
+        validators: passwordsIgualesValidator,
+      }
+    );
+  }
+  /**
+   * @description
+   * Maneja el envío del formulario de registro.
+   * Valida el formulario y, si es válido, registra al usuario.
+   * Muestra un mensaje de éxito y redirige al usuario a la página de inicio de sesión.
+   */
+  onSubmit() {
+    if (this.registroForm.valid) {
+      const { username, nombre, fecNacimiento, direccion, correo, password } &#x3D;
+        this.registroForm.value;
+      if (
+        this.authService.registrarUsuario(
+          username,
+          nombre,
+          fecNacimiento,
+          direccion,
+          correo,
+          password
+        )
+      ) {
+        Swal.fire({
+          icon: &#x27;success&#x27;,
+          title: &#x27;Registro exitoso&#x27;,
+          text: &#x27;Usuario registrado correctamente.&#x27;,
+          confirmButtonText: &#x27;Aceptar&#x27;,
+        }).then(() &#x3D;&gt; {
+          this.registroForm.reset();
+          this.router.navigate([&#x27;/login&#x27;]);
+        });
+      }
+    } else {
+      this.registroForm.markAllAsTouched();
+    }
+  }
+  /**
+   * @description
+   * Obtiene los controles del formulario de registro.
+   * Permite acceder a los controles del formulario de manera más sencilla en la plantilla.
+   * @returns {any} Los controles del formulario de registro.
+   * @example
+   * this.f.username.value // Obtiene el valor del campo username del formulario.
+   */
+  get f() {
+    return this.registroForm.controls;
+  }
+  /**
+   * @description
+   * Verifica si el campo de nombre de usuario es inválido y ha sido tocado.
+   * @returns {boolean} Verdadero si el campo es inválido y ha sido tocado, falso en caso contrario.
+   * */
+
+  get passwordsNoSonIguales() {
+    return (
+      this.registroForm.hasError(&#x27;notSame&#x27;) &amp;&amp; this.f[&#x27;confirmPassword&#x27;].touched
+    );
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;mt-5 w-full d-flex justify-content-center&quot;&gt;
+  &lt;div class&#x3D;&quot;logo-container&quot;&gt;
+    &lt;form
+      [formGroup]&#x3D;&quot;registroForm&quot;
+      (ngSubmit)&#x3D;&quot;onSubmit()&quot;
+      class&#x3D;&quot;p-4&quot;
+      novalidate
+    &gt;
+      &lt;h2&gt;Registro de Usuario&lt;/h2&gt;
+
+      &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+        &lt;label for&#x3D;&quot;username&quot; class&#x3D;&quot;form-label&quot;&gt;Nombre de Usuario&lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;text&quot;
+          id&#x3D;&quot;username&quot;
+          class&#x3D;&quot;form-control&quot;
+          formControlName&#x3D;&quot;username&quot;
+          [class.is-invalid]&#x3D;&quot;f[&#x27;username&#x27;].touched &amp;&amp; f[&#x27;username&#x27;].invalid&quot;
+          placeholder&#x3D;&quot;Ingresa tu nombre de usuario&quot;
+        /&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;f[&#x27;username&#x27;].touched &amp;&amp; f[&#x27;username&#x27;].invalid&quot;
+          class&#x3D;&quot;invalid-feedback&quot;
+        &gt;
+          Por favor, ingresa un nombre de usuario válido.
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+        &lt;label for&#x3D;&quot;nombre&quot; class&#x3D;&quot;form-label&quot;&gt;Nombre Completo&lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;text&quot;
+          id&#x3D;&quot;nombre&quot;
+          class&#x3D;&quot;form-control&quot;
+          formControlName&#x3D;&quot;nombre&quot;
+          [class.is-invalid]&#x3D;&quot;f[&#x27;nombre&#x27;].touched &amp;&amp; f[&#x27;nombre&#x27;].invalid&quot;
+          placeholder&#x3D;&quot;Ingresa tu nombre completo&quot;
+        /&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;f[&#x27;nombre&#x27;].touched &amp;&amp; f[&#x27;nombre&#x27;].invalid&quot;
+          class&#x3D;&quot;invalid-feedback&quot;
+        &gt;
+          Por favor, ingrese su nombre
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+        &lt;label for&#x3D;&quot;fecNacimiento&quot; class&#x3D;&quot;form-label&quot;&gt;Fecha Nacimiento&lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;date&quot;
+          id&#x3D;&quot;fecNacimiento&quot;
+          class&#x3D;&quot;form-control&quot;
+          formControlName&#x3D;&quot;fecNacimiento&quot;
+          [class.is-invalid]&#x3D;&quot;
+            f[&#x27;fecNacimiento&#x27;].touched &amp;&amp; f[&#x27;fecNacimiento&#x27;].invalid
+          &quot;
+          placeholder&#x3D;&quot;Ingresa tu fecha de nacimiento&quot;
+        /&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;f[&#x27;fecNacimiento&#x27;].touched &amp;&amp; f[&#x27;fecNacimiento&#x27;].errors?.[&#x27;required&#x27;]&quot;
+          class&#x3D;&quot;invalid-feedback&quot;
+        &gt;
+          Por favor, ingrese su fecha de nacimiento
+        &lt;/div&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;f[&#x27;fecNacimiento&#x27;].touched &amp;&amp; f[&#x27;fecNacimiento&#x27;].errors?.[&#x27;minAge&#x27;]&quot;
+          class&#x3D;&quot;invalid-feedback&quot;
+        &gt;
+          Debes tener al menos 13 años para registrarte.
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+        &lt;label for&#x3D;&quot;direccion&quot; class&#x3D;&quot;form-label&quot;&gt;Direccion&lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;text&quot;
+          id&#x3D;&quot;direccion&quot;
+          class&#x3D;&quot;form-control&quot;
+          formControlName&#x3D;&quot;direccion&quot;
+          [class.is-invalid]&#x3D;&quot;f[&#x27;direccion&#x27;].touched &amp;&amp; f[&#x27;direccion&#x27;].invalid&quot;
+          placeholder&#x3D;&quot;Ingresa tu direccion&quot;
+        /&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;f[&#x27;direccion&#x27;].touched &amp;&amp; f[&#x27;direccion&#x27;].invalid&quot;
+          class&#x3D;&quot;invalid-feedback&quot;
+        &gt;
+          Por favor, ingrese direccion.
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+        &lt;label for&#x3D;&quot;correo&quot; class&#x3D;&quot;form-label&quot;&gt;Correo Electronico&lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;email&quot;
+          id&#x3D;&quot;correo&quot;
+          class&#x3D;&quot;form-control&quot;
+          formControlName&#x3D;&quot;correo&quot;
+          [class.is-invalid]&#x3D;&quot;f[&#x27;correo&#x27;].touched &amp;&amp; f[&#x27;correo&#x27;].invalid&quot;
+          placeholder&#x3D;&quot;Ingresa tu correo electronico&quot;
+        /&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;f[&#x27;correo&#x27;].touched &amp;&amp; f[&#x27;correo&#x27;].invalid&quot;
+          class&#x3D;&quot;invalid-feedback&quot;
+        &gt;
+          Por favor, ingrese su email.
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+        &lt;label for&#x3D;&quot;password&quot; class&#x3D;&quot;form-label&quot;&gt;Contraseña&lt;/label&gt;
+        &lt;input
+          type&#x3D;&quot;password&quot;
+          id&#x3D;&quot;password&quot;
+          class&#x3D;&quot;form-control&quot;
+          formControlName&#x3D;&quot;password&quot;
+          [class.is-invalid]&#x3D;&quot;f[&#x27;password&#x27;].touched &amp;&amp; f[&#x27;password&#x27;].invalid&quot;
+          placeholder&#x3D;&quot;Ingresa tu contraseña&quot;
+        /&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;f[&#x27;password&#x27;].touched &amp;&amp; f[&#x27;password&#x27;].invalid&quot;
+          class&#x3D;&quot;invalid-feedback&quot;
+        &gt;
+          Por favor, ingresar una contraseña válida.
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;mb-3&quot;&gt;
+        &lt;label for&#x3D;&quot;confirmPassword&quot; class&#x3D;&quot;form-label&quot;
+          &gt;Confirmar Contraseña&lt;/label
+        &gt;
+        &lt;input
+          type&#x3D;&quot;password&quot;
+          id&#x3D;&quot;confirmPassword&quot;
+          class&#x3D;&quot;form-control&quot;
+          formControlName&#x3D;&quot;confirmPassword&quot;
+          [class.is-invalid]&#x3D;&quot;
+            f[&#x27;confirmPassword&#x27;].touched &amp;&amp; f[&#x27;confirmPassword&#x27;].invalid || passwordsNoSonIguales
+          &quot;
+          placeholder&#x3D;&quot;Vuelve a ingresar tu contraseña&quot;
+        /&gt;
+        &lt;div
+          *ngIf&#x3D;&quot;f[&#x27;confirmPassword&#x27;].touched &amp;&amp; f[&#x27;confirmPassword&#x27;].errors?.[&#x27;required&#x27;]&quot;
+          class&#x3D;&quot;invalid-feedback&quot;
+        &gt;
+          Por favor, confirma tu contraseña.
+        &lt;/div&gt;
+
+        &lt;div *ngIf&#x3D;&quot;passwordsNoSonIguales&quot; class&#x3D;&quot;invalid-feedback&quot;&gt;
+          Las contraseñas no coinciden.
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-primary&quot;&gt;Registrar&lt;/button&gt;
+
+      &lt;p class&#x3D;&quot;mt-3&quot;&gt;
+        ¿Olvidaste tu contraseña?
+        &lt;a routerLink&#x3D;&quot;/recuperar-pw&quot;&gt;Recuperar contraseña&lt;/a&gt;
+      &lt;/p&gt;
+      &lt;p class&#x3D;&quot;mt-3&quot;&gt;
+        ¿Ya tienes cuenta?
+        &lt;a routerLink&#x3D;&quot;/login&quot; routerLinkActive&#x3D;&quot;active&quot;&gt;Inicia Sesión Aquí&lt;/a&gt;
+      &lt;/p&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./registro.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="mt-5 w-full d-flex justify-content-center">  <div class="logo-container">    <form      [formGroup]="registroForm"      (ngSubmit)="onSubmit()"      class="p-4"      novalidate    >      <h2>Registro de Usuario</h2>      <div class="mb-3">        <label for="username" class="form-label">Nombre de Usuario</label>        <input          type="text"          id="username"          class="form-control"          formControlName="username"          [class.is-invalid]="f[\'username\'].touched && f[\'username\'].invalid"          placeholder="Ingresa tu nombre de usuario"        />        <div          *ngIf="f[\'username\'].touched && f[\'username\'].invalid"          class="invalid-feedback"        >          Por favor, ingresa un nombre de usuario válido.        </div>      </div>      <div class="mb-3">        <label for="nombre" class="form-label">Nombre Completo</label>        <input          type="text"          id="nombre"          class="form-control"          formControlName="nombre"          [class.is-invalid]="f[\'nombre\'].touched && f[\'nombre\'].invalid"          placeholder="Ingresa tu nombre completo"        />        <div          *ngIf="f[\'nombre\'].touched && f[\'nombre\'].invalid"          class="invalid-feedback"        >          Por favor, ingrese su nombre        </div>      </div>      <div class="mb-3">        <label for="fecNacimiento" class="form-label">Fecha Nacimiento</label>        <input          type="date"          id="fecNacimiento"          class="form-control"          formControlName="fecNacimiento"          [class.is-invalid]="            f[\'fecNacimiento\'].touched && f[\'fecNacimiento\'].invalid          "          placeholder="Ingresa tu fecha de nacimiento"        />        <div          *ngIf="f[\'fecNacimiento\'].touched && f[\'fecNacimiento\'].errors?.[\'required\']"          class="invalid-feedback"        >          Por favor, ingrese su fecha de nacimiento        </div>        <div          *ngIf="f[\'fecNacimiento\'].touched && f[\'fecNacimiento\'].errors?.[\'minAge\']"          class="invalid-feedback"        >          Debes tener al menos 13 años para registrarte.        </div>      </div>      <div class="mb-3">        <label for="direccion" class="form-label">Direccion</label>        <input          type="text"          id="direccion"          class="form-control"          formControlName="direccion"          [class.is-invalid]="f[\'direccion\'].touched && f[\'direccion\'].invalid"          placeholder="Ingresa tu direccion"        />        <div          *ngIf="f[\'direccion\'].touched && f[\'direccion\'].invalid"          class="invalid-feedback"        >          Por favor, ingrese direccion.        </div>      </div>      <div class="mb-3">        <label for="correo" class="form-label">Correo Electronico</label>        <input          type="email"          id="correo"          class="form-control"          formControlName="correo"          [class.is-invalid]="f[\'correo\'].touched && f[\'correo\'].invalid"          placeholder="Ingresa tu correo electronico"        />        <div          *ngIf="f[\'correo\'].touched && f[\'correo\'].invalid"          class="invalid-feedback"        >          Por favor, ingrese su email.        </div>      </div>      <div class="mb-3">        <label for="password" class="form-label">Contraseña</label>        <input          type="password"          id="password"          class="form-control"          formControlName="password"          [class.is-invalid]="f[\'password\'].touched && f[\'password\'].invalid"          placeholder="Ingresa tu contraseña"        />        <div          *ngIf="f[\'password\'].touched && f[\'password\'].invalid"          class="invalid-feedback"        >          Por favor, ingresar una contraseña válida.        </div>      </div>      <div class="mb-3">        <label for="confirmPassword" class="form-label"          >Confirmar Contraseña</label        >        <input          type="password"          id="confirmPassword"          class="form-control"          formControlName="confirmPassword"          [class.is-invalid]="            f[\'confirmPassword\'].touched && f[\'confirmPassword\'].invalid || passwordsNoSonIguales          "          placeholder="Vuelve a ingresar tu contraseña"        />        <div          *ngIf="f[\'confirmPassword\'].touched && f[\'confirmPassword\'].errors?.[\'required\']"          class="invalid-feedback"        >          Por favor, confirma tu contraseña.        </div>        <div *ngIf="passwordsNoSonIguales" class="invalid-feedback">          Las contraseñas no coinciden.        </div>      </div>      <button type="submit" class="btn btn-primary">Registrar</button>      <p class="mt-3">        ¿Olvidaste tu contraseña?        <a routerLink="/recuperar-pw">Recuperar contraseña</a>      </p>      <p class="mt-3">        ¿Ya tienes cuenta?        <a routerLink="/login" routerLinkActive="active">Inicia Sesión Aquí</a>      </p>    </form>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminPanelComponent', 'selector': 'app-admin-panel'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CarritoComponent', 'selector': 'app-carrito'},{'name': 'CategoriaProductoComponent', 'selector': 'app-categoria-producto'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'PerfilComponent', 'selector': 'app-perfil'},{'name': 'RecuperarPwComponent', 'selector': 'app-recuperar-pw'},{'name': 'RegistroComponent', 'selector': 'app-registro'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'RegistroComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'RegistroComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

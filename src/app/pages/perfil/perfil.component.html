@@ -1,1 +1,77 @@
-<p>perfil works!</p>
+<div class="container my-5">
+  <h2>Perfil de Usuario</h2>
+  <p><strong>Nombre:</strong> {{ perfilData?.nombre }}</p>
+  <p><strong>Email:</strong> {{ perfilData?.email }}</p>
+  <p><strong>Dirección:</strong> {{ perfilData?.direccion }}</p>
+
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEditarPerfil">
+    Editar Perfil
+  </button>
+</div>
+<div
+  class="modal fade"
+  id="modalEditarPerfil"
+  tabindex="-1"
+  aria-labelledby="modalEditarPerfilLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form [formGroup]="perfilForm" (ngSubmit)="guardarCambios()" novalidate>
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditarPerfilLabel">Editar Perfil</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Cerrar"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="editNombre" class="form-label">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="editNombre"
+              formControlName="nombre"
+              required
+            />
+            <div class="invalid-feedback">Nombre no puede estar vacío.</div>
+          </div>
+          <div class="mb-3">
+            <label for="editEmail" class="form-label">Correo electrónico</label>
+            <input
+              type="email"
+              class="form-control"
+              id="editEmail"
+              formControlName="email"
+              required
+            />
+            <div class="invalid-feedback">Debe ingresar un correo válido.</div>
+          </div>
+          <div class="mb-3">
+            <label for="editDireccion" class="form-label">Dirección</label>
+            <input
+              type="text"
+              class="form-control"
+              id="editDireccion"
+              formControlName="direccion"
+              required
+            />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-success">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
