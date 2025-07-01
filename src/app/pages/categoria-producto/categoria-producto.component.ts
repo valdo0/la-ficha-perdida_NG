@@ -3,6 +3,7 @@ import { ProductoService } from 'src/app/services/producto/producto.service';
 import { Producto } from 'src/app/models/producto.model';
 import { ActivatedRoute } from '@angular/router';
 import { CarritoService } from 'src/app/services/carrito/carrito.service';
+import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import Swal from 'sweetalert2';
 /**
  * @description
@@ -32,6 +33,15 @@ export class CategoriaProductoComponent {
   productos: Producto[] = [];
   /**
    * @description
+   * Nombre de la categoría de productos que se está visualizando.
+   * Este valor se puede utilizar para mostrar el nombre de la categoría en la interfaz de usuario.
+   * Por defecto, está vacío y se puede establecer dinámicamente según la categoría seleccionada.
+   * Este campo puede ser utilizado para mostrar el nombre de la categoría en la interfaz de usuario.
+   * @type {string}
+   */
+  nombreCategoria: string = '';
+  /**
+   * @description
    * Constructor del componente CategoriaProductoComponent.
    * Inyecta los servicios CarritoService y ProductoService, así como ActivatedRoute para acceder a los parámetros de la ruta.
    * @param carritoService
@@ -41,7 +51,8 @@ export class CategoriaProductoComponent {
   constructor(
     private carritoService: CarritoService,
     private productoService: ProductoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private categoriaService: CategoriaService
   ) {}
   /**
    * @description
@@ -52,6 +63,7 @@ export class CategoriaProductoComponent {
    */
   ngOnInit(): void {
     const categoryId = Number(this.route.snapshot.paramMap.get('categoryId'));
+    this.nombreCategoria = this.categoriaService.getCategoriaById(categoryId)?.nombre || '';
     this.productos = this.productoService.getProductosByCategoryId(categoryId);
   }
   /**

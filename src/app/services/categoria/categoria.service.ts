@@ -66,4 +66,13 @@ export class CategoriaService {
   getCategorias():Categoria[] {
     return this.categorias;
   }
+  /**
+   * @description
+   * Obtiene una categoría específica por su ID.
+   * @param {number} id - Identificador único de la categoría.
+   * @returns {Categoria | undefined} La categoría correspondiente al ID, o undefined si no se encuentra.
+   */
+  getCategoriaById(id: number): Categoria | undefined {
+    return this.categorias.find(categoria => categoria.id === id);
+  }
 }

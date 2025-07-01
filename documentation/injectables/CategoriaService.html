@@ -159,6 +159,9 @@ Proporciona métodos para obtener una lista de categorías predefinidas.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#getCategoriaById" >getCategoriaById</a>
+                            </li>
+                            <li>
                                 <a href="#getCategorias" >getCategorias</a>
                             </li>
                         </ul>
@@ -204,6 +207,83 @@ Inicializa el servicio sin dependencias adicionales.</p>
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getCategoriaById"></a>
+                    <span class="name">
+                        <span ><b>getCategoriaById</b></span>
+                        <a href="#getCategoriaById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getCategoriaById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/app/services/categoria/categoria.service.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Obtiene una categoría específica por su ID.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Identificador único de la categoría.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/Categoria.html" target="_self" >Categoria | undefined</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>La categoría correspondiente al ID, o undefined si no se encuentra.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -390,6 +470,15 @@ export class CategoriaService {
    */
   getCategorias():Categoria[] {
     return this.categorias;
+  }
+  /**
+   * @description
+   * Obtiene una categoría específica por su ID.
+   * @param {number} id - Identificador único de la categoría.
+   * @returns {Categoria | undefined} La categoría correspondiente al ID, o undefined si no se encuentra.
+   */
+  getCategoriaById(id: number): Categoria | undefined {
+    return this.categorias.find(categoria &#x3D;&gt; categoria.id &#x3D;&#x3D;&#x3D; id);
   }
 }
 </code></pre>
