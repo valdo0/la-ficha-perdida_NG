@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Categoria } from 'src/app/models/categoria.model';
+import { map, Observable } from 'rxjs';
 /**
  * @description
  * Servicio para manejar las categorías de juegos.
@@ -25,46 +27,20 @@ export class CategoriaService {
  * @property {string} descripcion - Descripción de la categoría.
  * @property {string} slug - Slug para URL amigable de la categoría.
  */
-  private categorias:Categoria[] =[
-    {
-     id:1,
-     nombre:"Estrategia y Aventura" ,
-     descripcion:"Sumérgete en mundos épicos y desafía tu mente con nuestros juegos de estrategia más populares.",
-     slug:"estrategia-aventura"
-    },
-    {
-      id:2,
-      nombre:"Familiares y Divertidos" ,
-      descripcion:"Perfectos para noches de risas con amigos y familia. ¡Fáciles de aprender, difíciles de dejar!",
-      slug:"familiares-y-divertidos"
-     },
-     {
-      id:3,
-      nombre:"Party Games" ,
-      descripcion:"La mejor selección para animar cualquier reunión. ¡Adivina, ríe y compite con ingenio!",
-      slug:"party-games"
-     },
-     {
-      id:4,
-      nombre:"Novedades" ,
-      descripcion:"Siempre estamos buscando los últimos lanzamientos. ¡Sé el primero en jugar lo más nuevo!",
-      slug:"novedades"
-     }
-  ]
 /**
  * @description
  * Constructor del servicio CategoriaService.
  * Inicializa el servicio sin dependencias adicionales.
  */
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
   /**
    * @description
    * Obtiene la lista de categorías de juegos.
    * @returns {Categoria[]} Lista de categorías.
    */
-  getCategorias():Categoria[] {
-    return this.categorias;
+  getCategorias():Observable<Categoria[]> {
+    return this.http.get<Categoria[]>('https://valdo0.github.io/api_lafichaperdida/categoria.json');
   }
   /**
    * @description
@@ -72,7 +48,9 @@ export class CategoriaService {
    * @param {number} id - Identificador único de la categoría.
    * @returns {Categoria | undefined} La categoría correspondiente al ID, o undefined si no se encuentra.
    */
-  getCategoriaById(id: number): Categoria | undefined {
-    return this.categorias.find(categoria => categoria.id === id);
+  getCategoriaById(id: number): Observable<Categoria | undefined> {
+    return this.http.get<Categoria[]>('https://valdo0.github.io/api_lafichaperdida/categoria.json').pipe(
+      map(categorias => categorias.find(categoria => categoria.id === id))
+    );
   }
 }

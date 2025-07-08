@@ -7,7 +7,10 @@
         <h2>{{ producto.name }}</h2>
         <p class="description">{{ producto.description }}</p>
         ${{ producto.price | number : "1.0-0" }}
-        <button class="btn-game" (click)="agregarAlCarrito(producto)">
+        <button 
+          class="btn-game" 
+          [disabled]="producto.price === 0" 
+          (click)="agregarAlCarrito(producto)">
           Agregar al Carrito
         </button>
       </article>

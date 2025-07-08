@@ -54,7 +54,9 @@ export class HomeComponent implements OnInit {
    * cuando se navega a través de rutas con fragmentos.
    */
   ngOnInit(): void {
-    this.categorias = this.categoriasService.getCategorias();
+    this.categoriasService.getCategorias().subscribe((categorias) => {
+      this.categorias = categorias;
+    });
 
     this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))

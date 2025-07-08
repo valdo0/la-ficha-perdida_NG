@@ -63,8 +63,13 @@ export class CategoriaProductoComponent {
    */
   ngOnInit(): void {
     const categoryId = Number(this.route.snapshot.paramMap.get('categoryId'));
-    this.nombreCategoria = this.categoriaService.getCategoriaById(categoryId)?.nombre || '';
-    this.productos = this.productoService.getProductosByCategoryId(categoryId);
+    this.categoriaService.getCategoriaById(categoryId).subscribe((categoria) => {
+      this.nombreCategoria = categoria?.nombre || '';
+    });
+    this.productoService.getProductosByCategoryId(categoryId).subscribe((productos: Producto[]) => {
+      this.productos = productos;
+      console.log(this.productos);
+    });
   }
   /**
    * @description
