@@ -4,6 +4,7 @@ import { CategoriaProductoComponent } from './categoria-producto.component';
 import { ComponentsModule } from 'src/app/components/layout/components.module';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CategoriaProductoComponent', () => {
   let component: CategoriaProductoComponent;
@@ -12,7 +13,7 @@ describe('CategoriaProductoComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [CategoriaProductoComponent],
-      imports: [ComponentsModule],
+      imports: [ComponentsModule,HttpClientTestingModule],
       providers: [
         {
           provide: ActivatedRoute,

@@ -5,6 +5,7 @@ import { ComponentsModule } from 'src/app/components/layout/components.module';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -13,7 +14,7 @@ describe('HomeComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [ComponentsModule,RouterTestingModule],
+      imports: [ComponentsModule,RouterTestingModule,HttpClientTestingModule],
       providers: [
         {
           provide: ActivatedRoute,

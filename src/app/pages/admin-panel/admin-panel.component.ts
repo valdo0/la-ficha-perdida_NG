@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import {Chart,BarController,BarElement,CategoryScale,LinearScale,Title,Tooltip,Legend,ArcElement,DoughnutController,PieController} from 'chart.js';
+import { Producto } from 'src/app/models/producto.model';
+import { ProductoService } from 'src/app/services/producto/producto.service';
+import { Categoria } from 'src/app/models/categoria.model';
+import { CategoriaService } from 'src/app/services/categoria/categoria.service';
+import Swal from 'sweetalert2';
 Chart.register(BarController,BarElement,CategoryScale,LinearScale,Title,Tooltip,Legend,ArcElement,DoughnutController,PieController);
 /**
  * @description 
@@ -58,6 +63,12 @@ export class AdminPanelComponent implements OnInit {
    * Utiliza FormBuilder para definir los controles y validaciones del formulario.
    */
   usuarioForm!: FormGroup;
+
+  productos:Producto[] = [];
+  categorias:Categoria[] = [];
+  productoForm!: FormGroup;
+  productoSeleccionado: any = null;
+  modalProducto: any;
 /**
  * @description
  * Constructor del componente AdminPanelComponent.
@@ -66,19 +77,35 @@ export class AdminPanelComponent implements OnInit {
  */
   constructor(
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private productosService: ProductoService,
+    private categoriaService: CategoriaService
   ) {}
 /**
  * @description
  * Método del ciclo de vida de Angular que se ejecuta al inicializar el componente.
  */
   ngOnInit() {
+    const modalElement = document.getElementById('modalProducto');
+    this.categoriaService.getCategorias().subscribe((data: Categoria[]) => {
+      this.categorias = data;
+    });
+    this.productosService.getAllProductos().subscribe((data: Producto[]) => {
+      this.productos = data;
+    });
+
     this.cargarUsuarios();
     this.usuarioForm = this.fb.group({
       nombre: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       username: ['', Validators.required],
       tipo: ['usuario', Validators.required]
+    });
+    this.productoForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      price: [0, [Validators.required, Validators.min(0)]],
+      categoryId: ['', Validators.required],
     });
   }
 
@@ -309,5 +336,64 @@ export class AdminPanelComponent implements OnInit {
       }
     });
   }
-  
+/**
+ * @description
+ * Método para agregar un nuevo producto al sistema.
+ */
+agregarProducto() {
+  this.productoSeleccionado = null;
+  this.productoForm.reset();
+  const modal = new (window as any).bootstrap.Modal(document.getElementById('modalProducto')!);
+  modal.show();
+}
+/**
+ * 
+ * @param index 
+ * @description
+ * Método para eliminar un producto del sistema.
+ */
+  eliminarProducto(index: number) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¡No podrás deshacer esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, eliminarlo',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productos.splice(index, 1);
+      }})
+  }
+  /**
+   * 
+   * @param index 
+   * @description
+   * Método para editar un producto en el sistema.
+   */
+  editarProducto(index: number) {
+    this.productoSeleccionado = this.productos[index];
+    this.productoForm.patchValue(this.productoSeleccionado);
+    const modal = new (window as any).bootstrap.Modal(document.getElementById('modalProducto')!);
+    modal.show();
+  }
+  guardarProducto() {
+    const nuevoProducto = this.productoForm.value;
+if(this.productoForm.valid){
+  if (this.productoSeleccionado) {
+    // Editar
+    const index = this.productos.findIndex(p => p === this.productoSeleccionado);
+    this.productos[index] = { ...this.productoSeleccionado, ...nuevoProducto };
+  } else {
+    // Agregar
+    this.productos.push(nuevoProducto);
+  }
+  const modal = (window as any).bootstrap.Modal.getInstance(document.getElementById('modalProducto')!);
+  modal?.hide();
+  this.productoForm.reset();
+  this.productoSeleccionado = null;
+}
+}
 }
