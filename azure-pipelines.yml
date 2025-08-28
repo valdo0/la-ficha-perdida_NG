@@ -6,9 +6,6 @@
 trigger:
 - master
 
-pool:
-  name: LocalPool
-
 
 steps:
 - task: NodeTool@0
