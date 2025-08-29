@@ -25,43 +25,6 @@ variables:
   imageVersion: 'latest'
 
 steps:
-# ----------------------------
-# 1️⃣ Provisionar VM con Apache
-# ----------------------------
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: $(azureSubscription)
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      set -e
-
-      echo "Creando grupo de recursos..."
-      az group create --name $(resourceGroupName) --location "$(location)"
-
-      echo "Creando red virtual..."
-      az network vnet create --resource-group $(resourceGroupName) --name $(virtualNetworkName) --address-prefix $(addressPrefix) --subnet-name $(subnetName) --subnet-prefix $(subnetPrefix)
-
-      echo "Creando grupo de seguridad de red..."
-      az network nsg create --resource-group $(resourceGroupName) --name $(securityGroupName)
-
-      echo "Configurando reglas de NSG..."
-      az network nsg rule create --resource-group $(resourceGroupName) --nsg-name $(securityGroupName) --name AllowSSH --protocol tcp --direction inbound --priority 1000 --source-address-prefix '*' --source-port-range '*' --destination-address-prefix '*' --destination-port-range 22 --access allow
-      az network nsg rule create --resource-group $(resourceGroupName) --nsg-name $(securityGroupName) --name AllowHTTP --protocol tcp --direction inbound --priority 1001 --source-address-prefix '*' --source-port-range '*' --destination-address-prefix '*' --destination-port-range 80 --access allow
-      az network nsg rule create --resource-group $(resourceGroupName) --nsg-name $(securityGroupName) --name AllowICMP --protocol icmp --direction inbound --priority 1002 --source-address-prefix '*' --source-port-range '*' --destination-address-prefix '*' --destination-port-range '*' --access allow
-
-      echo "Creando IP pública..."
-      az network public-ip create --resource-group $(resourceGroupName) --name $(publicIpName) --sku Standard --allocation-method Static
-
-      echo "Creando la máquina virtual..."
-      az vm create --resource-group $(resourceGroupName) --name $(vmName) --image $(imagePublisher):$(imageOffer):$(imageSku):$(imageVersion) --size $(vmSize) --admin-username $(adminUsername) --admin-password $(adminPassword) --vnet-name $(virtualNetworkName) --subnet $(subnetName) --nsg $(securityGroupName) --public-ip-address $(publicIpName)
-
-      echo "Instalando Apache..."
-      az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "sudo apt update && sudo apt install -y apache2 unzip"
-
-# ----------------------------
-# 2️⃣ Build Angular
-# ----------------------------
 - task: NodeTool@0
   inputs:
     versionSpec: '17.x'
@@ -82,34 +45,4 @@ steps:
     archiveFile: $(Build.ArtifactStagingDirectory)/frontned.zip
     replaceExistingArchive: true
 
-# ----------------------------
-# 3️⃣ Copiar artefacto a la VM con AzureFileCopy
-# ----------------------------
-- task: AzureFileCopy@4
-  displayName: "Copiar frontend.zip a VM"
-  inputs:
-    SourcePath: '$(Build.ArtifactStagingDirectory)/frontned.zip'
-    azureSubscription: '$(azureSubscription)'
-    Destination: 'AzureVMs'
-    resourceGroup: '$(resourceGroupName)'
-    vmName: '$(vmName)'
-    adminUsername: '$(adminUsername)'
-    adminPassword: '$(adminPassword)'
-    targetPath: '/home/$(adminUsername)'
 
-# ----------------------------
-# 4️⃣ Desplegar en Apache
-# ----------------------------
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: $(azureSubscription)
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
-      echo "Desplegando en Apache..."
-      az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
-        sudo rm -rf /var/www/html/*
-        sudo unzip /home/$(adminUsername)/frontned.zip -d /var/www/html/
-        sudo chown -R www-data:www-data /var/www/html/
-        sudo chmod -R 755 /var/www/html/
-      "
