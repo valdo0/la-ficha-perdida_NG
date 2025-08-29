@@ -24,9 +24,12 @@ variables:
   imageSku: '22_04-lts-gen2'
   imageVersion: 'latest'
 
+  repoUrl: 'https://github.com/tu_usuario/tu_repositorio.git'
+  branch: 'main'
+
 steps:
 # ----------------------------
-# 1️⃣ Provisionar VM con Apache
+# 1️⃣ Provisionar VM con Node y Apache
 # ----------------------------
 - task: AzureCLI@2
   inputs:
@@ -48,7 +51,6 @@ steps:
       echo "Configurando reglas de NSG..."
       az network nsg rule create --resource-group $(resourceGroupName) --nsg-name $(securityGroupName) --name AllowSSH --protocol tcp --direction inbound --priority 1000 --source-address-prefix '*' --source-port-range '*' --destination-address-prefix '*' --destination-port-range 22 --access allow
       az network nsg rule create --resource-group $(resourceGroupName) --nsg-name $(securityGroupName) --name AllowHTTP --protocol tcp --direction inbound --priority 1001 --source-address-prefix '*' --source-port-range '*' --destination-address-prefix '*' --destination-port-range 80 --access allow
-      az network nsg rule create --resource-group $(resourceGroupName) --nsg-name $(securityGroupName) --name AllowICMP --protocol icmp --direction inbound --priority 1002 --source-address-prefix '*' --source-port-range '*' --destination-address-prefix '*' --destination-port-range '*' --access allow
 
       echo "Creando IP pública..."
       az network public-ip create --resource-group $(resourceGroupName) --name $(publicIpName) --sku Standard --allocation-method Static
@@ -56,36 +58,16 @@ steps:
       echo "Creando la máquina virtual..."
       az vm create --resource-group $(resourceGroupName) --name $(vmName) --image $(imagePublisher):$(imageOffer):$(imageSku):$(imageVersion) --size $(vmSize) --admin-username $(adminUsername) --admin-password $(adminPassword) --vnet-name $(virtualNetworkName) --subnet $(subnetName) --nsg $(securityGroupName) --public-ip-address $(publicIpName)
 
-      echo "Instalando Apache y unzip en la VM..."
-      az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "sudo apt update && sudo apt install -y apache2 unzip"
+      echo "Instalando Apache, Node.js, npm, git y unzip..."
+      az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
+        sudo apt update
+        sudo apt install -y apache2 git unzip curl
+        curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
+        sudo apt install -y nodejs
+      "
 
 # ----------------------------
-# 2️⃣ Build Angular
-# ----------------------------
-- task: NodeTool@0
-  inputs:
-    versionSpec: '17.x'
-  displayName: 'Install Node.js'
-
-- script: |
-    npm install
-    npm run build
-  displayName: 'Build Angular'
-
-- task: ArchiveFiles@2
-  displayName: 'Archive dist/frontned'
-  inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist/frontned'
-    includeRootFolder: false
-    archiveType: zip
-    archiveFile: $(Build.ArtifactStagingDirectory)/frontend.zip
-    replaceExistingArchive: true
-
-- upload: $(Build.ArtifactStagingDirectory)/frontend.zip
-  artifact: "frontend"
-
-# ----------------------------
-# 3️⃣ Copiar build a VM y desplegar
+# 2️⃣ Clonar repo y hacer build en la VM
 # ----------------------------
 - task: AzureCLI@2
   inputs:
@@ -95,14 +77,17 @@ steps:
     inlineScript: |
       echo "Obteniendo IP pública de la VM..."
       VM_IP=$(az vm show --resource-group $(resourceGroupName) --name $(vmName) --show-details --query "publicIpAddress" -o tsv)
+      echo "IP pública: $VM_IP"
 
-      echo "Copiando frontend.zip a la VM..."
-      scp -o StrictHostKeyChecking=no $(Build.ArtifactStagingDirectory)/frontend.zip $(adminUsername)@$VM_IP:/home/azureuser/
-
-      echo "Desplegando la aplicación en Apache..."
+      echo "Clonando repo y build dentro de la VM..."
       az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
+        cd /home/azureuser
+        git clone -b $(branch) $(repoUrl) app
+        cd app
+        npm install
+        npm run build
         sudo rm -rf /var/www/html/*
-        sudo unzip /home/azureuser/frontend.zip -d /var/www/html/
+        sudo cp -r dist/* /var/www/html/
         sudo chown -R www-data:www-data /var/www/html/
         sudo chmod -R 755 /var/www/html/
       "
