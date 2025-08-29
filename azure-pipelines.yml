@@ -70,7 +70,7 @@ steps:
 - script: |
     npm install -g @angular/cli
     npm install
-    ng build --prod
+    npm run build
   displayName: 'Build Angular'
 
 - task: ArchiveFiles@2
