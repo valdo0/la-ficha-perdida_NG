@@ -100,7 +100,9 @@ steps:
     inlineScript: |
       echo "Clonando repositorio y haciendo build en la VM..."
       az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
-        # Variables de usuario
+        export NVM_DIR=\"\$HOME/.nvm\"
+        [ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"
+
         REPO='$(repoUrl)'
         BRANCH='$(branch)'
         APP_DIR='/home/$(adminUsername)/app'
@@ -115,6 +117,9 @@ steps:
           cd \$APP_DIR
         fi
 
+        # Usar Node 17
+        nvm use 17
+
         # Build Angular
         npm install
         npm run build
@@ -124,6 +129,10 @@ steps:
         sudo cp -r dist/* /var/www/html/
         sudo chown -R www-data:www-data /var/www/html/
         sudo chmod -R 755 /var/www/html/
+
+        # Reiniciar Apache
+        sudo systemctl restart apache2
+      "
 
         # Reiniciar Apache
         sudo systemctl restart apache2
