@@ -56,9 +56,8 @@ steps:
       echo "Creando la máquina virtual..."
       az vm create --resource-group $(resourceGroupName) --name $(vmName) --image $(imagePublisher):$(imageOffer):$(imageSku):$(imageVersion) --size $(vmSize) --admin-username $(adminUsername) --admin-password $(adminPassword) --vnet-name $(virtualNetworkName) --subnet $(subnetName) --nsg $(securityGroupName) --public-ip-address $(publicIpName)
 
-      echo "Instalando Apache..."
+      echo "Instalando Apache y unzip en la VM..."
       az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "sudo apt update && sudo apt install -y apache2 unzip"
-
 
 # ----------------------------
 # 2️⃣ Build Angular
@@ -70,7 +69,7 @@ steps:
 
 - script: |
     npm install
-    npm run build 
+    npm run build
   displayName: 'Build Angular'
 
 - task: ArchiveFiles@2
@@ -86,7 +85,7 @@ steps:
   artifact: "frontend"
 
 # ----------------------------
-# 3️⃣ Copiar build a VM
+# 3️⃣ Copiar build a VM y desplegar
 # ----------------------------
 - task: AzureCLI@2
   inputs:
@@ -94,11 +93,13 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      echo "Descargando artefacto desde el pipeline..."
-      # Nota: en producción podrías usar Release Pipeline para desplegar artefactos
-      # Aquí asumimos que ya tienes frontend.zip descargado en $(Pipeline.Workspace)
+      echo "Obteniendo IP pública de la VM..."
+      VM_IP=$(az vm show --resource-group $(resourceGroupName) --name $(vmName) --show-details --query "publicIpAddress" -o tsv)
 
-      # Descomprimir y copiar a la VM
+      echo "Copiando frontend.zip a la VM..."
+      scp -o StrictHostKeyChecking=no $(Build.ArtifactStagingDirectory)/frontend.zip $(adminUsername)@$VM_IP:/home/azureuser/
+
+      echo "Desplegando la aplicación en Apache..."
       az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
         sudo rm -rf /var/www/html/*
         sudo unzip /home/azureuser/frontend.zip -d /var/www/html/
