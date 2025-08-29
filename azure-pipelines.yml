@@ -24,12 +24,12 @@ variables:
   imageSku: '22_04-lts-gen2'
   imageVersion: 'latest'
 
-  repoUrl: 'https://github.com/valdo0/la-ficha-perdida_NG.git'
+  repoUrl: 'https://github.com/tu_usuario/tu_repositorio.git'
   branch: 'main'
 
 steps:
 # ----------------------------
-# 1️⃣ Provisionar VM con Node y Apache
+# 1️⃣ Provisionar VM con Apache y Node.js
 # ----------------------------
 - task: AzureCLI@2
   inputs:
@@ -51,14 +51,25 @@ steps:
       echo "Configurando reglas de NSG..."
       az network nsg rule create --resource-group $(resourceGroupName) --nsg-name $(securityGroupName) --name AllowSSH --protocol tcp --direction inbound --priority 1000 --source-address-prefix '*' --source-port-range '*' --destination-address-prefix '*' --destination-port-range 22 --access allow
       az network nsg rule create --resource-group $(resourceGroupName) --nsg-name $(securityGroupName) --name AllowHTTP --protocol tcp --direction inbound --priority 1001 --source-address-prefix '*' --source-port-range '*' --destination-address-prefix '*' --destination-port-range 80 --access allow
+      az network nsg rule create --resource-group $(resourceGroupName) --nsg-name $(securityGroupName) --name AllowICMP --protocol icmp --direction inbound --priority 1002 --source-address-prefix '*' --source-port-range '*' --destination-address-prefix '*' --destination-port-range '*' --access allow
 
       echo "Creando IP pública..."
       az network public-ip create --resource-group $(resourceGroupName) --name $(publicIpName) --sku Standard --allocation-method Static
 
       echo "Creando la máquina virtual..."
-      az vm create --resource-group $(resourceGroupName) --name $(vmName) --image $(imagePublisher):$(imageOffer):$(imageSku):$(imageVersion) --size $(vmSize) --admin-username $(adminUsername) --admin-password $(adminPassword) --vnet-name $(virtualNetworkName) --subnet $(subnetName) --nsg $(securityGroupName) --public-ip-address $(publicIpName)
+      az vm create \
+        --resource-group $(resourceGroupName) \
+        --name $(vmName) \
+        --image $(imagePublisher):$(imageOffer):$(imageSku):$(imageVersion) \
+        --size $(vmSize) \
+        --admin-username $(adminUsername) \
+        --admin-password $(adminPassword) \
+        --vnet-name $(virtualNetworkName) \
+        --subnet $(subnetName) \
+        --nsg $(securityGroupName) \
+        --public-ip-address $(publicIpName)
 
-      echo "Instalando Apache, Node.js, npm, git y unzip..."
+      echo "Instalando Apache, Node.js, git y unzip..."
       az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
         sudo apt update
         sudo apt install -y apache2 git unzip curl
@@ -67,7 +78,7 @@ steps:
       "
 
 # ----------------------------
-# 2️⃣ Clonar repo y hacer build en la VM
+# 2️⃣ Clonar repositorio y build Angular dentro de la VM
 # ----------------------------
 - task: AzureCLI@2
   inputs:
@@ -75,19 +86,33 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      echo "Obteniendo IP pública de la VM..."
-      VM_IP=$(az vm show --resource-group $(resourceGroupName) --name $(vmName) --show-details --query "publicIpAddress" -o tsv)
-      echo "IP pública: $VM_IP"
-
-      echo "Clonando repo y build dentro de la VM..."
+      echo "Clonando repositorio y haciendo build en la VM..."
       az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
-        cd /home/azureuser
-        git clone -b $(branch) $(repoUrl) app
-        cd app
+        # Variables de usuario
+        REPO='$(repoUrl)'
+        BRANCH='$(branch)'
+        APP_DIR='/home/$(adminUsername)/app'
+
+        # Clonar o actualizar repo
+        if [ -d \$APP_DIR ]; then
+          cd \$APP_DIR
+          git reset --hard
+          git pull origin \$BRANCH
+        else
+          git clone -b \$BRANCH \$REPO \$APP_DIR
+          cd \$APP_DIR
+        fi
+
+        # Build Angular
         npm install
         npm run build
+
+        # Copiar build a Apache
         sudo rm -rf /var/www/html/*
         sudo cp -r dist/* /var/www/html/
         sudo chown -R www-data:www-data /var/www/html/
         sudo chmod -R 755 /var/www/html/
+
+        # Reiniciar Apache
+        sudo systemctl restart apache2
       "
