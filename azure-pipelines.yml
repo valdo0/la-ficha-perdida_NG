@@ -74,23 +74,23 @@ steps:
   displayName: 'Build Angular'
 
 - task: ArchiveFiles@2
-  displayName: 'Archive dist/frontend'
+  displayName: 'Archive dist/frontned'
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist/frontned'
     includeRootFolder: false
     archiveType: zip
-    archiveFile: $(Build.ArtifactStagingDirectory)/frontend.zip
+    archiveFile: $(Build.ArtifactStagingDirectory)/frontned.zip
     replaceExistingArchive: true
 
-- publish: $(Build.ArtifactStagingDirectory)/frontend.zip
-  artifact: 'frontend'
+- publish: $(Build.ArtifactStagingDirectory)/frontned.zip
+  artifact: 'frontned'
 
 # ----------------------------
 # 3️⃣ Descargar artefacto y copiar a VM
 # ----------------------------
 - task: DownloadPipelineArtifact@2
   inputs:
-    artifact: 'frontend'
+    artifact: 'frontned'
     path: '$(Pipeline.Workspace)/frontned'
 
 - task: AzureCLI@2
@@ -102,8 +102,8 @@ steps:
       echo "Copiando artefacto a la VM..."
       az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
         sudo rm -rf /var/www/html/*
-        sudo cp $(Pipeline.Workspace)/frontned/frontend.zip /home/$(adminUsername)/frontend.zip
-        sudo unzip /home/$(adminUsername)/frontend.zip -d /var/www/html/
+        sudo cp $(Pipeline.Workspace)/frontned/frontned.zip /home/$(adminUsername)/frontned.zip
+        sudo unzip /home/$(adminUsername)/frontned.zip -d /var/www/html/
         sudo chown -R www-data:www-data /var/www/html/
         sudo chmod -R 755 /var/www/html/
       "
