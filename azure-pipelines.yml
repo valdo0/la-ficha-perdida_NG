@@ -24,12 +24,9 @@ variables:
   imageSku: '22_04-lts-gen2'
   imageVersion: 'latest'
 
-  repoUrl: 'https://github.com/valdo0/la-ficha-perdida_NG.git'
-  branch: 'main'
-
 steps:
 # ----------------------------
-# 1️⃣ Provisionar VM con Apache y Node.js
+# 1️⃣ Provisionar VM con Apache
 # ----------------------------
 - task: AzureCLI@2
   inputs:
@@ -57,40 +54,39 @@ steps:
       az network public-ip create --resource-group $(resourceGroupName) --name $(publicIpName) --sku Standard --allocation-method Static
 
       echo "Creando la máquina virtual..."
-      az vm create \
-        --resource-group $(resourceGroupName) \
-        --name $(vmName) \
-        --image $(imagePublisher):$(imageOffer):$(imageSku):$(imageVersion) \
-        --size $(vmSize) \
-        --admin-username $(adminUsername) \
-        --admin-password $(adminPassword) \
-        --vnet-name $(virtualNetworkName) \
-        --subnet $(subnetName) \
-        --nsg $(securityGroupName) \
-        --public-ip-address $(publicIpName)
+      az vm create --resource-group $(resourceGroupName) --name $(vmName) --image $(imagePublisher):$(imageOffer):$(imageSku):$(imageVersion) --size $(vmSize) --admin-username $(adminUsername) --admin-password $(adminPassword) --vnet-name $(virtualNetworkName) --subnet $(subnetName) --nsg $(securityGroupName) --public-ip-address $(publicIpName)
 
-      echo "Instalando Apache, git, unzip y Node.js via NVM..."
-      az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
-        sudo apt update
-        sudo apt install -y apache2 git unzip curl
-      
-        # Instalar NVM
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-        export NVM_DIR=\"\$HOME/.nvm\"
-        [ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"
-      
-        # Instalar Node 17
-        nvm install 17
-        nvm use 17
-        nvm alias default 17
-      
-        node -v
-        npm -v
-      "
-
+      echo "Instalando Apache..."
+      az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "sudo apt update && sudo apt install -y apache2"
 
 # ----------------------------
-# 2️⃣ Clonar repositorio y build Angular dentro de la VM
+# 2️⃣ Build Angular
+# ----------------------------
+- task: NodeTool@0
+  inputs:
+    versionSpec: '17.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install -g @angular/cli
+    npm install
+    ng build --prod
+  displayName: 'Build Angular'
+
+- task: ArchiveFiles@2
+  displayName: 'Archive dist/frontned'
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist/frontned'
+    includeRootFolder: false
+    archiveType: zip
+    archiveFile: $(Build.ArtifactStagingDirectory)/frontend.zip
+    replaceExistingArchive: true
+
+- upload: $(Build.ArtifactStagingDirectory)/frontend.zip
+  artifact: "frontend"
+
+# ----------------------------
+# 3️⃣ Copiar build a VM
 # ----------------------------
 - task: AzureCLI@2
   inputs:
@@ -98,42 +94,14 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      echo "Clonando repositorio y haciendo build en la VM..."
+      echo "Descargando artefacto desde el pipeline..."
+      # Nota: en producción podrías usar Release Pipeline para desplegar artefactos
+      # Aquí asumimos que ya tienes frontend.zip descargado en $(Pipeline.Workspace)
+
+      # Descomprimir y copiar a la VM
       az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
-        export NVM_DIR=\"\$HOME/.nvm\"
-        [ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"
-
-        REPO='$(repoUrl)'
-        BRANCH='$(branch)'
-        APP_DIR='/home/$(adminUsername)/app'
-
-        # Clonar o actualizar repo
-        if [ -d \$APP_DIR ]; then
-          cd \$APP_DIR
-          git reset --hard
-          git pull origin \$BRANCH
-        else
-          git clone -b \$BRANCH \$REPO \$APP_DIR
-          cd \$APP_DIR
-        fi
-
-        # Usar Node 17
-        nvm use 17
-
-        # Build Angular
-        npm install
-        npm run build
-
-        # Copiar build a Apache
         sudo rm -rf /var/www/html/*
-        sudo cp -r dist/* /var/www/html/
+        sudo unzip /home/azureuser/frontend.zip -d /var/www/html/
         sudo chown -R www-data:www-data /var/www/html/
         sudo chmod -R 755 /var/www/html/
-
-        # Reiniciar Apache
-        sudo systemctl restart apache2
-      "
-
-        # Reiniciar Apache
-        sudo systemctl restart apache2
       "
