@@ -57,7 +57,7 @@ steps:
       az vm create --resource-group $(resourceGroupName) --name $(vmName) --image $(imagePublisher):$(imageOffer):$(imageSku):$(imageVersion) --size $(vmSize) --admin-username $(adminUsername) --admin-password $(adminPassword) --vnet-name $(virtualNetworkName) --subnet $(subnetName) --nsg $(securityGroupName) --public-ip-address $(publicIpName)
 
       echo "Instalando Apache..."
-      az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "sudo apt update && sudo apt install -y apache2"
+      az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "sudo apt update && sudo apt install -y apache2 unzip"
 
 # ----------------------------
 # 2️⃣ Build Angular
@@ -74,34 +74,36 @@ steps:
   displayName: 'Build Angular'
 
 - task: ArchiveFiles@2
-  displayName: 'Archive dist/frontned'
+  displayName: 'Archive dist/frontend'
   inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist/frontned'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist/frontend'
     includeRootFolder: false
     archiveType: zip
     archiveFile: $(Build.ArtifactStagingDirectory)/frontend.zip
     replaceExistingArchive: true
 
-- upload: $(Build.ArtifactStagingDirectory)/frontend.zip
-  artifact: "frontend"
+- publish: $(Build.ArtifactStagingDirectory)/frontend.zip
+  artifact: 'frontend'
 
 # ----------------------------
-# 3️⃣ Copiar build a VM
+# 3️⃣ Descargar artefacto y copiar a VM
 # ----------------------------
+- task: DownloadPipelineArtifact@2
+  inputs:
+    artifact: 'frontend'
+    path: '$(Pipeline.Workspace)/frontend'
+
 - task: AzureCLI@2
   inputs:
     azureSubscription: $(azureSubscription)
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      echo "Descargando artefacto desde el pipeline..."
-      # Nota: en producción podrías usar Release Pipeline para desplegar artefactos
-      # Aquí asumimos que ya tienes frontend.zip descargado en $(Pipeline.Workspace)
-
-      # Descomprimir y copiar a la VM
+      echo "Copiando artefacto a la VM..."
       az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
         sudo rm -rf /var/www/html/*
-        sudo unzip /home/azureuser/frontend.zip -d /var/www/html/
+        sudo cp $(Pipeline.Workspace)/frontend/frontend.zip /home/$(adminUsername)/frontend.zip
+        sudo unzip /home/$(adminUsername)/frontend.zip -d /var/www/html/
         sudo chown -R www-data:www-data /var/www/html/
         sudo chmod -R 755 /var/www/html/
       "
