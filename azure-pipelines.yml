@@ -102,7 +102,7 @@ steps:
       echo "Copiando artefacto a la VM..."
       az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
         sudo rm -rf /var/www/html/*
-        sudo cp $(Pipeline.Workspace)/frontend/frontend.zip /home/$(adminUsername)/frontend.zip
+        sudo cp $(Pipeline.Workspace)/frontned/frontend.zip /home/$(adminUsername)/frontend.zip
         sudo unzip /home/$(adminUsername)/frontend.zip -d /var/www/html/
         sudo chown -R www-data:www-data /var/www/html/
         sudo chmod -R 755 /var/www/html/
