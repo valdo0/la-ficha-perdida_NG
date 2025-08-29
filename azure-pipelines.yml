@@ -24,7 +24,7 @@ variables:
   imageSku: '22_04-lts-gen2'
   imageVersion: 'latest'
 
-  repoUrl: 'https://github.com/tu_usuario/tu_repositorio.git'
+  repoUrl: 'https://github.com/valdo0/la-ficha-perdida_NG.git'
   branch: 'main'
 
 steps:
