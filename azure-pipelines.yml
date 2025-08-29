@@ -82,27 +82,33 @@ steps:
     archiveFile: $(Build.ArtifactStagingDirectory)/frontned.zip
     replaceExistingArchive: true
 
-- publish: $(Build.ArtifactStagingDirectory)/frontned.zip
-  artifact: 'frontned'
-
 # ----------------------------
-# 3️⃣ Descargar artefacto y copiar a VM
+# 3️⃣ Copiar artefacto a la VM con AzureFileCopy
 # ----------------------------
-- task: DownloadPipelineArtifact@2
+- task: AzureFileCopy@4
+  displayName: "Copiar frontend.zip a VM"
   inputs:
-    artifact: 'frontned'
-    path: '$(Pipeline.Workspace)/frontned'
+    SourcePath: '$(Build.ArtifactStagingDirectory)/frontned.zip'
+    azureSubscription: '$(azureSubscription)'
+    Destination: 'AzureVMs'
+    resourceGroup: '$(resourceGroupName)'
+    vmName: '$(vmName)'
+    adminUsername: '$(adminUsername)'
+    adminPassword: '$(adminPassword)'
+    targetPath: '/home/$(adminUsername)'
 
+# ----------------------------
+# 4️⃣ Desplegar en Apache
+# ----------------------------
 - task: AzureCLI@2
   inputs:
     azureSubscription: $(azureSubscription)
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      echo "Copiando artefacto a la VM..."
+      echo "Desplegando en Apache..."
       az vm run-command invoke --resource-group $(resourceGroupName) --name $(vmName) --command-id RunShellScript --scripts "
         sudo rm -rf /var/www/html/*
-        sudo cp $(Pipeline.Workspace)/frontned/frontned.zip /home/$(adminUsername)/frontned.zip
         sudo unzip /home/$(adminUsername)/frontned.zip -d /var/www/html/
         sudo chown -R www-data:www-data /var/www/html/
         sudo chmod -R 755 /var/www/html/
