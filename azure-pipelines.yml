@@ -76,7 +76,7 @@ steps:
 - task: ArchiveFiles@2
   displayName: 'Archive dist/frontend'
   inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist/frontend'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist/frontned'
     includeRootFolder: false
     archiveType: zip
     archiveFile: $(Build.ArtifactStagingDirectory)/frontend.zip
@@ -91,7 +91,7 @@ steps:
 - task: DownloadPipelineArtifact@2
   inputs:
     artifact: 'frontend'
-    path: '$(Pipeline.Workspace)/frontend'
+    path: '$(Pipeline.Workspace)/frontned'
 
 - task: AzureCLI@2
   inputs:
